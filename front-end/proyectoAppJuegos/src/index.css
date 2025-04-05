@@ -1,0 +1,40 @@
+/* Reset de estilos generales */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif; /* Puedes cambiar la fuente si lo deseas */
+  background-color: #f5f5f5; /* Fondo general */
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* Asegurarse de que los enlaces no tengan estilos por defecto */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitar que los elementos de formulario tengan estilo predeterminado */
+input, button, textarea, select {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* Asegurarse de que no haya líneas azules en inputs y botones cuando están enfocados */
+input:focus, button:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
