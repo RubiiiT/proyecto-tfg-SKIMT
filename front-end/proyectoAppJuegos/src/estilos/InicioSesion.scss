@@ -1,0 +1,170 @@
+.pantallaSesion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #251723;
+  padding: 2rem;
+  
+
+  .formularioSesion {
+    background-color: #3B2C38;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 1.25rem 1.25rem 0 rgba(0, 0, 0, 0.2);
+    width: 55%;
+    height: 70%;
+    color: #EF076D;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    #tituloInicioSesion {
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 #ef076d, 4px 4px 0 #000000;
+      position: relative;
+    
+      &::after {
+        content: '';
+        display: block;
+        margin: 0.5rem auto 0;
+        width: 60%;
+        height: 4px;
+        background-color: #ef076d;
+        
+        border-radius: 2px;
+      }
+    }
+    
+
+    .campos {
+      font-size: clamp(1rem, 2.5vw, 2rem);
+      width: 70%;
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .campo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        label {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40%;
+          text-shadow:3px 4px 0 #1E1E1E;
+        }
+
+        input {
+          width: 60%;
+          padding: 1rem;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          font-size: clamp(1rem, 2vw, 1.2rem);
+          box-shadow: 10px 10px 0 #1E1E1E;
+          
+        }
+      }
+    }
+
+    .botones {
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+      margin-top: 2rem;
+      font-size: clamp(0.5rem, 1vw, 1.2rem);
+
+      .btn {
+       
+        width: 40%;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        position: relative;
+        box-shadow: 10px 10px 0 #1E1E1E;
+        
+        transition:
+          transform 0.1s ease,
+          box-shadow 0.1s ease,
+          filter 0.2s ease;
+
+        &:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 12px 12px 0 #000;
+          filter: brightness(1.1);
+        }
+
+        &:active {
+          transform: translate(2px, 2px);
+          box-shadow: 3px 3px 0 #000;
+          filter: brightness(0.9);
+        }
+
+        &#btnIniciarSesion {
+          background-color: #96F527;
+          color: #000;
+          
+        }
+
+        &#btnRegistrar {
+          background-color: #EF076D;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+// 📱 Responsive para móviles
+@media (max-width: 768px) {
+  .pantallaSesion {
+    .formularioSesion {
+      width: 90%;
+      height: auto;
+      padding: 1.5rem;
+
+      .campos {
+        width: 100%;
+      }
+
+      .botones {
+        flex-direction: column;
+        width: 100%;
+
+        .btn {
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1450px) {
+  .pantallaSesion {
+    .formularioSesion {
+      width: 80%;
+      height: auto;
+      padding: 1.5rem;
+
+    }
+    .botones{
+      .btn{
+        font-size: 1.25rem;
+      }
+      
+    }
+  }
+}
