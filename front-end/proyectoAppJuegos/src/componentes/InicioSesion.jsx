@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "../estilos/InicioSesion.css";
+import "../estilos/InicioSesion.scss";
 
 function InicioSesion() {
   const [usuario, setUsuario] = useState('');
@@ -14,8 +14,9 @@ function InicioSesion() {
   return (
     <div className="pantallaSesion">
       <form onSubmit={handleSubmit} className="formularioSesion">
-        <h2>Iniciar sesión</h2>
+        <h2 id='tituloInicioSesion'>SKIMT</h2>
         
+        <div className='campos'>
         <div className="campo">
           <label htmlFor="usuario">Usuario</label>
           <input
@@ -37,10 +38,12 @@ function InicioSesion() {
             placeholder="Escribe tu contraseña"
           />
         </div>
+        </div>
 
         <div className="botones">
-          <button type="submit" className="btn" id='btnIniciarSesion'>Iniciar sesión</button>
+         
           <button type="button" className="btn" id='btnRegistrar'>Registrarse</button>
+          <button type="submit" className="btn" id='btnIniciarSesion'>Iniciar sesión</button>
         </div>
       </form>
     </div>
