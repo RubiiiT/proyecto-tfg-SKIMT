@@ -18,7 +18,7 @@ public class Usuario {
     private String nombre;
 
     @Column(nullable = false)
-    private Double dinero;
+    private int dinero;
 
     // Añadimos el campo email
     @Column(nullable = false, unique = true, length = 255)
@@ -37,7 +37,7 @@ public class Usuario {
     public Usuario() {}
 
     // Constructor con todos los campos
-    public Usuario(Long usuario_id, String firebase_uid, String nombre, Double dinero, String email) {
+    public Usuario(Long usuario_id, String firebase_uid, String nombre, int dinero, String email) {
         this.usuario_id = usuario_id;
         this.firebase_uid = firebase_uid;
         this.nombre = nombre;
@@ -70,11 +70,11 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public Double getDinero() {
+    public int getDinero() {
         return dinero;
     }
 
-    public void setDinero(Double dinero) {
+    public void setDinero(int dinero) {
         this.dinero = dinero;
     }
 
