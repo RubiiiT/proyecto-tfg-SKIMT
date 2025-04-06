@@ -16,7 +16,7 @@ public class Juego {
     private String nombre;
 
     @Column(nullable = false)
-    private Double precio;
+    private int precio;
 
     @Column(length = 500)
     private String descripcion;
@@ -38,7 +38,7 @@ public class Juego {
     public Juego() {}
 
     // Constructor con todos los campos
-    public Juego(Long juego_id, String nombre, Double precio, String descripcion, String portada, String video, String foto_larga) {
+    public Juego(Long juego_id, String nombre, int precio, String descripcion, String portada, String video, String foto_larga) {
         this.juego_id = juego_id;
         this.nombre = nombre;
         this.precio = precio;
@@ -65,11 +65,11 @@ public class Juego {
         this.nombre = nombre;
     }
 
-    public Double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
