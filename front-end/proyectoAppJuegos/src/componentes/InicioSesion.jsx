@@ -1,15 +1,65 @@
 import { useState } from 'react';
 import "../estilos/InicioSesion.scss";
+// Para el firebase
+import { signInWithEmailAndPassword,auth } from "../config/firebaseConfig";
+import ServicioFirebase from '../servicios/axios/ServicioFirebase';
 
 function InicioSesion() {
-  const [usuario, setUsuario] = useState('');
-  const [contraseña, setContraseña] = useState('');
+  const [usuario, setUsuario] = useState("");
+  const [contrasena, setContrasena] = useState("");
 
-  const handleSubmit = (e) => {
+  const funcionAlerta = (icono,titulo,texto)=>{
+    Swal.fire({ icon: icono, title: titulo, text: texto,
+        
+      color:"#EF076D",
+      customClass: {
+       confirmButton: 'botonConfirmarAlerta'
+     }
+     });
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí podrías agregar la lógica para iniciar sesión
-    console.log('Usuario:', usuario, 'Contraseña:', contraseña);
+  
+    if (usuario.length === 0 && contrasena.length === 0) {
+      funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene los dos campos");
+    } else if (usuario.length === 0) {
+      funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de usuario");
+    } else if (contrasena.length === 0) {
+      funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de contraseña");
+    } else {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, usuario, contrasena); 
+        const user = userCredential.user;
+        console.log('Usuario autenticado', user);
+        
+        // Puedes obtener el token si lo necesitas
+        const token = await user.getIdToken();
+        console.log("Token JWT:", token);
+  
+        console.log("CONEXION BACK")
+
+        ServicioFirebase.verificarToken(token)
+       
+        .then(response=>{
+          console.log("Respuesta del backend:", response.data);
+        })
+        .catch(error=>{
+          console.error("Error de autenticación: ", error.message);
+        
+        })
+
+        // Puedes mostrar alerta de éxito o redirigir al usuario aquí
+        funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
+      } catch (error) {
+        funcionAlerta("error", "Error de autenticación", error.message);
+        console.error("Error de autenticación: ", error.message);
+      }
+    }
   };
+  
+
+  
 
   return (
     <div className="pantallaSesion">
@@ -33,8 +83,8 @@ function InicioSesion() {
           <input
             type="password"
             id="contraseña"
-            value={contraseña}
-            onChange={(e) => setContraseña(e.target.value)}
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
             placeholder="Escribe tu contraseña"
           />
         </div>
