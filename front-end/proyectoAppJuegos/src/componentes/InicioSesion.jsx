@@ -3,10 +3,25 @@ import "../estilos/InicioSesion.scss";
 // Para el firebase
 import { signInWithEmailAndPassword,auth } from "../config/firebaseConfig";
 import ServicioFirebase from '../servicios/axios/ServicioFirebase';
+//Para el modal del registro
+import Modal from './Modal';
+
+import Registro from './Registro';
 
 function InicioSesion() {
   const [usuario, setUsuario] = useState("");
   const [contrasena, setContrasena] = useState("");
+
+  //Modal para el registro
+  const [modal, setModal] = useState({
+    registrar: false
+
+  });
+
+  const gestionarModal = (tipo, estado) => {
+    setModal((prev) => ({ ...prev, [tipo]: estado }));
+   
+  };
 
   const funcionAlerta = (icono,titulo,texto)=>{
     Swal.fire({ icon: icono, title: titulo, text: texto,
@@ -28,40 +43,45 @@ function InicioSesion() {
     } else if (contrasena.length === 0) {
       funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de contraseña");
     } else {
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, usuario, contrasena); 
-        const user = userCredential.user;
-        console.log('Usuario autenticado', user);
-        
-        // Puedes obtener el token si lo necesitas
-        const token = await user.getIdToken();
-        console.log("Token JWT:", token);
-  
-        console.log("CONEXION BACK")
-
-        ServicioFirebase.verificarToken(token)
-       
-        .then(response=>{
-          console.log("Respuesta del backend:", response.data);
-        })
-        .catch(error=>{
-          console.error("Error de autenticación: ", error.message);
-        
-        })
-
-        // Puedes mostrar alerta de éxito o redirigir al usuario aquí
-        funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
-      } catch (error) {
-        funcionAlerta("error", "Error de autenticación", error.message);
-        console.error("Error de autenticación: ", error.message);
-      }
+      inicioSesionFirebase()
     }
   };
   
 
-  
+  const inicioSesionFirebase = async()=>{
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, usuario, contrasena); 
+      const user = userCredential.user;
+      console.log('Usuario autenticado', user);
+      
+      // Puedes obtener el token si lo necesitas
+      const token = await user.getIdToken();
+      console.log("Token JWT:", token);
+
+      console.log("CONEXION BACK")
+
+      ServicioFirebase.verificarToken(token)
+     
+      .then(response=>{
+        // 
+        console.log("Respuesta del backend:", response.data);
+        funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
+      })
+      .catch(error=>{
+        console.error("Error de autenticación: ", error.message);
+        funcionAlerta("error", "Error de autenticación", error.message);
+      
+      })
+
+     
+    } catch (error) {
+      funcionAlerta("error", "Error de autenticación", error.message);
+      console.error("Error de autenticación: ", error.message);
+    }
+  }
 
   return (
+    <>
     <div className="pantallaSesion">
       <form onSubmit={handleSubmit} className="formularioSesion">
         <h2 id='tituloInicioSesion'>SKIMT</h2>
@@ -92,11 +112,16 @@ function InicioSesion() {
 
         <div className="botones">
          
-          <button type="button" className="btn" id='btnRegistrar'>Registrarse</button>
+          <button type="button" className="btn" id='btnRegistrar' onClick={()=>gestionarModal("registrar",true)}>Registrarse</button>
           <button type="submit" className="btn" id='btnIniciarSesion'>Iniciar sesión</button>
         </div>
       </form>
     </div>
+    
+    <Modal isOpen={modal.registrar} onClose={() => gestionarModal("registrar", false)}>
+    {<Registro onClose={()=>gestionarModal("registrar",false)}></Registro>}
+  </Modal>
+     </>
   );
 }
 
