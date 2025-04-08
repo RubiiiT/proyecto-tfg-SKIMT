@@ -1,0 +1,150 @@
+/* Estilo del formulario dentro del Modal */
+.formularioRegistro {
+    background-color: #3B2C38;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 100%;
+    color: #EF076D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    /* Título del Formulario de Registro */
+    h2 {
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 #ef076d, 4px 4px 0 #000000;
+      position: relative;
+  
+      &::after {
+        content: '';
+        display: block;
+        margin: 0.5rem auto 0;
+        width: 60%;
+        height: 4px;
+        background-color: #ef076d;
+        border-radius: 2px;
+      }
+    }
+  
+    /* Campos de entrada (input) */
+    .campo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      width: 100%;
+  
+      label {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        text-shadow: 3px 4px 0 #1E1E1E;
+      }
+  
+      input {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1.2rem;
+        box-shadow: 10px 10px 0 #1E1E1E;
+        margin-bottom: 1rem;
+      }
+    }
+  
+    /* Mensajes de error */
+    .error {
+      color: #96F527;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+  
+    /* Botones de acción */
+    .botones {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+   
+  
+      .btn {
+        width: 50%;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        position: relative;
+        box-shadow: 10px 10px 0 #1E1E1E;
+        
+        transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+  
+        &:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 12px 12px 0 #000;
+          filter: brightness(1.1);
+        }
+  
+        &:active {
+          transform: translate(2px, 2px);
+          box-shadow: 3px 3px 0 #000;
+          filter: brightness(0.9);
+        }
+  
+        &#btnRegistrar {
+          background-color: #EF076D;
+          color: #fff;
+        }
+      }
+    }
+  }
+  
+  /* 📱 Responsive para dispositivos móviles */
+  @media (max-width: 768px) {
+    .formularioRegistro {
+     
+      padding: 1.5rem;
+  
+      h2 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+      }
+  
+      .campo {
+        margin-bottom: 1rem;
+      }
+      .botones {
+      .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+    }
+    }
+  }
+  
+  /* 🖥️ Para pantallas más grandes (por ejemplo, tabletas o escritorios pequeños) */
+  @media (max-width: 1450px) {
+    .formularioRegistro {
+      height: auto;
+      padding: 1.5rem;
+    }
+  
+    .botones {
+    .btn {
+      
+      font-size: 1.25rem;
+    }
+}
+  }
+  
+  /* Estilo para la alerta de confirmación en el modal */
+  .botonConfirmarAlerta {
+    background-color: #96F527;
+    color: #000;
+  }
+  
