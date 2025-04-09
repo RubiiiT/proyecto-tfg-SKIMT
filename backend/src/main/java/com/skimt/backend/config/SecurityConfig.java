@@ -14,7 +14,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/juegos", "/verificarToken").permitAll()
+                        .requestMatchers("/juegos", "/verificarToken","/usuarios").permitAll()
                         .anyRequest().authenticated()
                 );
 
