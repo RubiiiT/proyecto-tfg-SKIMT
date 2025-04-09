@@ -1,6 +1,9 @@
 import '../estilos/MenuSuperior.scss'
 
-const MenuSuperior = () => {
+const MenuSuperior = ({usuarioActivo}) => {
+
+  console.log(usuarioActivo)
+
   return (
     <div className="barraSuperior">
       <div className="menuIzquierda">
@@ -24,7 +27,7 @@ const MenuSuperior = () => {
                 <a  className="link">Obtener Puntos</a>
             </li>
             <li>
-                <h2>200</h2>
+                <h2>{usuarioActivo.dinero}</h2>
                 <img src="logoDivisa.png" alt="iconoMoneda" />
             </li>
         </ul>
