@@ -44,6 +44,7 @@ function InicioSesion({setUsuarioActivo}) {
     } else if (contrasena.length === 0) {
       funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de contraseña");
     } else {
+      
       inicioSesionFirebase()
     }
   };
@@ -66,7 +67,8 @@ function InicioSesion({setUsuarioActivo}) {
         // 
         console.log("Respuesta del backend:", response.data);
         funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
-        setUsuarioActivo(usuario)
+        //Tengo que hacer que desde el back devuelva el usuario entero
+        setUsuarioActivo(response.data)
       })
       .catch(error=>{
         console.error("Error de autenticación: ", error.message);

@@ -15,7 +15,7 @@ function App() {
    <>
     {usuarioActivo ? (
        <>
-        <MenuSuperior></MenuSuperior>
+        <MenuSuperior usuarioActivo={usuarioActivo}></MenuSuperior>
      <Tienda></Tienda>
      </>
     ):(
