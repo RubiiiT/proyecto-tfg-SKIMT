@@ -1,21 +1,30 @@
-import { useState } from 'react'
+
 import './App.css'
+import MenuSuperior from './componentes/MenuSuperior'
 import InicioSesion from './componentes/InicioSesion'
-import ListaJuegos from './componentes/pruebaJuegos'
+import PruebaJuegos from './componentes/Tienda'
+import Tienda from './componentes/Tienda'
+import { useState } from 'react'
+
 
 function App() {
 
   const [usuarioActivo,setUsuarioActivo] = useState(null)
   
   return (
-    <>
-      {usuarioActivo ? (
-        <h1>Hola</h1>
-      ):(
-        <InicioSesion setUsuarioActivo={setUsuarioActivo}></InicioSesion>      
-      )}
+   <>
+    {usuarioActivo ? (
+       <>
+        <MenuSuperior></MenuSuperior>
+     <Tienda></Tienda>
+     </>
+    ):(
      
-    </>
+    
+      <InicioSesion setUsuarioActivo={setUsuarioActivo}></InicioSesion>
+      
+    )}
+   </>
   )
 }
 

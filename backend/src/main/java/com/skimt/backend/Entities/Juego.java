@@ -11,7 +11,6 @@ public class Juego {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long juego_id;
 
-    // Añadimos el campo nombre y lo hacemos único
     @Column(nullable = false, unique = true, length = 255)
     private String nombre;
 
@@ -20,6 +19,9 @@ public class Juego {
 
     @Column(length = 500)
     private String descripcion;
+    
+    @Column(length = 500)
+    private String categoria;
 
     @Column(length = 255)
     private String portada;
@@ -30,19 +32,19 @@ public class Juego {
     @Column(length = 255)
     private String foto_larga;
 
-    // Relación ManyToMany con Usuario
     @ManyToMany(mappedBy = "juegos")
     private Set<Usuario> usuarios = new HashSet<>();
 
     // Constructor vacío
     public Juego() {}
 
-    // Constructor con todos los campos
-    public Juego(Long juego_id, String nombre, int precio, String descripcion, String portada, String video, String foto_larga) {
+    // Constructor con todos los campos (incluyendo categoria)
+    public Juego(Long juego_id, String nombre, int precio, String descripcion, String categoria, String portada, String video, String foto_larga) {
         this.juego_id = juego_id;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.categoria = categoria;
         this.portada = portada;
         this.video = video;
         this.foto_larga = foto_larga;
@@ -79,6 +81,14 @@ public class Juego {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getPortada() {
@@ -120,6 +130,7 @@ public class Juego {
                 ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", descripcion='" + descripcion + '\'' +
+                ", categoria='" + categoria + '\'' +
                 ", portada='" + portada + '\'' +
                 ", video='" + video + '\'' +
                 ", foto_larga='" + foto_larga + '\'' +

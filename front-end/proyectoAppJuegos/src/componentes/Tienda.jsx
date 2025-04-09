@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import "../estilos/ListaJuegos.scss";
+import "../estilos/Tienda.scss";
 
 
-const ListaJuegos = () => {
+const Tienda = () => {
     const [juegos, setJuegos] = useState([]);
   
     useEffect(() => {
@@ -18,7 +18,6 @@ const ListaJuegos = () => {
         <ul className="lista">
           {juegos.map(juego => (
             <li key={juego.juego_id} className="juegoItem">
-              <span className="nombreJuego">{juego.nombre}</span>
               <img className="portadaJuego" src={juego.portada} alt={juego.nombre} />
             </li>
           ))}
@@ -27,4 +26,4 @@ const ListaJuegos = () => {
     );
   };
   
-  export default ListaJuegos;
+  export default Tienda;

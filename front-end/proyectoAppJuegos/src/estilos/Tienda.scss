@@ -1,0 +1,118 @@
+.listaJuegos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #3B2C38;
+  padding: 2rem;
+  min-height: 100vh;
+  padding-top: 100px; /* Ajusta este valor según el tamaño de la barra superior */
+  margin-top: 0; /* Asegúrate de que no haya margen extra */
+
+  .tituloLista {
+    color: #EF076D;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #ef076d, 4px 4px 0 #000000;
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      margin: 1rem auto 0;
+      width: 60%;
+      height: 4px;
+      background-color: #ef076d;
+      border-radius: 2px;
+    }
+  }
+
+  .lista {
+    display: grid; /* Usamos grid para la disposición */
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+    gap: 3rem; /* Aumentamos la separación entre los juegos */
+    width: 80%;
+    max-width: 1200px; /* Ajusté el ancho máximo */
+    margin: 0 auto;
+
+    .juegoItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: transparent; /* Fondo transparente */
+      padding: 0; /* Sin padding adicional */
+      border: none; /* Eliminar borde */
+      color: #EF076D;
+      box-shadow: 16px 16px 0 #1E1E1E;
+      border-radius: 0.5rem;
+      font-size: clamp(0.9rem, 2vw, 1.2rem); /* Hicimos los juegos más pequeños */
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05); /* Aumenta el tamaño al pasar el ratón */
+      }
+
+      .nombreJuego {
+        display: none; /* Hacemos que el texto no se muestre */
+      }
+
+      .portadaJuego {
+        height: auto; /* Mantiene la relación de aspecto de la imagen */
+        max-width: 100%; /* Asegura que no se desborde */
+        object-fit: cover; /* La imagen cubre todo el espacio */
+        border-radius: 0.25rem; /* Bordes suaves */
+      }
+    }
+  }
+}
+
+/* 📱 Responsive para móviles */
+@media (max-width: 768px) {
+  .listaJuegos {
+    .tituloLista {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      margin-bottom: 2rem;
+    }
+
+    .lista {
+      width: 90%;
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
+      gap: 1.5rem; /* Ajustamos la separación en móviles */
+    }
+
+    .juegoItem {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 0;
+      border-radius: 0.25rem;
+
+      .portadaJuego {
+        width: 75%; /* Imagen un poco más pequeña en móvil */
+        height: auto;
+        box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.6); /* Sombra más difusa en móvil */
+      }
+    }
+  }
+}
+
+@media (max-width: 1450px) {
+  .listaJuegos {
+    .tituloLista {
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .lista {
+      width: 85%;
+      grid-template-columns: repeat(4, 1fr); /* 4 columnas en pantallas medianas */
+      gap: 2.5rem; /* Aumentamos la separación entre juegos */
+    }
+
+    .juegoItem {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    }
+  }
+}
