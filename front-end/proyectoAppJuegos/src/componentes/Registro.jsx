@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import '../estilos/Registro.scss';  
+//Para firebase
+import { auth } from "../config/firebaseConfig";
+import {deleteUser,createUserWithEmailAndPassword} from "firebase/auth";
+import ServicioFirebase from '../servicios/axios/ServicioFirebase';
 
 function Registro({onClose}) {
   // Estados para los campos
@@ -19,6 +23,10 @@ function Registro({onClose}) {
       setError('Por favor, rellena todos los campos');
       return;
     }
+    if(contrasena.length<6){
+      setError('La longitud de la contraseña tiene que se mayor a 6');
+      return;
+    }
 
     if (contrasena !== confirmarContrasena) {
       setError('Las contraseñas no coinciden');
@@ -27,11 +35,12 @@ function Registro({onClose}) {
 
     // Si todo es correcto, puedes manejar el registro aquí
     setError('');
-    sweetAlertCerrarTemporizador(nombre)
-    onClose()
+       //AQui LLAMO al metodo para registrar el usuario en firebase y guardar sus datos en mysql a traves de springboot
+       registroFirebase()
+
     console.log('Formulario enviado:', { nombre, gmail, contrasena });
 
-    // Aquí puedes llamar a tu API para registrar el usuario
+ 
   };
 
   const sweetAlertCerrarTemporizador= (nombre)=>{
@@ -42,6 +51,71 @@ function Registro({onClose}) {
         showConfirmButton: false,
         timer: 1500
       });
+  }
+
+  const registroFirebase = async()=>{
+    //Para luego poder acceder a el por si falla el back, para borrarlo
+    let usuario=null;
+    try {
+      const credencialUsuario = await createUserWithEmailAndPassword(auth, gmail, contrasena); 
+     
+      usuario = credencialUsuario.user;
+      console.log('Usuario autenticado', usuario);
+      
+      // Puedes obtener el token si lo necesitas
+     // const token = await usuario.getIdToken();
+      //console.log("Token JWT:", token);
+
+      console.log("CONEXION BACK")
+
+      ServicioFirebase.registroBackEnd({
+        email: usuario.email,
+        nombre: nombre,
+        dinero:0,
+        firebase_uid:usuario.uid
+      })
+      .then(response=>{
+        // 
+        console.log("Respuesta del backend:", response.data);
+        //funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
+        sweetAlertCerrarTemporizador(nombre)
+        onClose()
+      })
+      .catch(error=>{
+        console.error("Error de autenticación: ", error.message);
+        funcionAlerta("error", "Error de autenticación", error.message);
+         //Borrando el usuario ya que , si falla el back, aun asi crea el usuario porque se crea primero y luego va al back
+      try {
+        usuario.delete();
+        console.log("Usuario eliminado de Firebase por error en el backend.");
+      } catch (e) {
+        console.error("No se pudo eliminar el usuario de Firebase:", e.message);
+      }
+      
+      })
+
+     
+    } catch (error) {
+      if(error.code === "auth/email-already-in-use"){
+        funcionAlerta("error", "El email ya está registrado");
+      }else{
+        funcionAlerta("error", "Error de registro", error.message);
+        console.error("Error de autenticación: ", error.code);
+      }
+      
+      
+      
+    }
+  }
+
+  const funcionAlerta = (icono,titulo,texto)=>{
+    Swal.fire({ icon: icono, title: titulo, text: texto,
+        
+      color:"#EF076D",
+      customClass: {
+       confirmButton: 'botonConfirmarAlerta'
+     }
+     });
   }
 
   return (

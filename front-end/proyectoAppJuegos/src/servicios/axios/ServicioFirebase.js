@@ -1,8 +1,11 @@
 import http from "./http-axios.js";
 
 class ServicioFirebase{
-   verificarToken(token){
+   inicioSesionBackEnd(token){
     return http.post("/verificarToken",{token});
+   }
+   registroBackEnd(usuario){
+      return http.post("/usuarios",usuario);
    }
 }
 

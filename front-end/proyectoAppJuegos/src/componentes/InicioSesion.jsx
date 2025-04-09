@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import "../estilos/InicioSesion.scss";
 // Para el firebase
-import { signInWithEmailAndPassword,auth } from "../config/firebaseConfig";
+import { auth } from "../config/firebaseConfig";
+import {signInWithEmailAndPassword} from "firebase/auth";
 import ServicioFirebase from '../servicios/axios/ServicioFirebase';
 //Para el modal del registro
 import Modal from './Modal';
 
 import Registro from './Registro';
 
-function InicioSesion() {
+function InicioSesion({setUsuarioActivo}) {
   const [usuario, setUsuario] = useState("");
   const [contrasena, setContrasena] = useState("");
 
@@ -60,12 +61,12 @@ function InicioSesion() {
 
       console.log("CONEXION BACK")
 
-      ServicioFirebase.verificarToken(token)
-     
+      ServicioFirebase.inicioSesionBackEnd(token)
       .then(response=>{
         // 
         console.log("Respuesta del backend:", response.data);
         funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
+        setUsuarioActivo(usuario)
       })
       .catch(error=>{
         console.error("Error de autenticación: ", error.message);
