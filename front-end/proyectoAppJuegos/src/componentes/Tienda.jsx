@@ -134,7 +134,7 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
 
      
       <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-      <h4 className='destacado'>Juegos Destacados</h4>
+      <h4 className='destacado'>Juegos del Mes</h4>
         <ol className="carousel-indicators">
           {juegosSlider.map((juego, index) => (
             <li
@@ -177,7 +177,7 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
       </div>
 
 
-      <h4 className='filtro'>Juegos por filtrado</h4>
+      <h4 className='filtro'>Otros juegos</h4>
 
       <ul className="lista">
         {juegos.map(juego => (

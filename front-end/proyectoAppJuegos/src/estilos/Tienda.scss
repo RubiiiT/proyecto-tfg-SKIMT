@@ -10,26 +10,27 @@
   margin-top: 2rem; 
 
   h4{
-    color: white;
-    font-size: 1rem;
+    color: #EF076D;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    text-shadow:  2px 2px 0 #000000;
+    font-weight: bold;
+    letter-spacing: 2px;
     width: 100%;
     text-align: left;
+
   }
 
   h4.filtro{
-    margin-left: 40rem;
+  margin-left:35% ;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   }
 
-  .tituloLista {
-    color: #EF076D;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 0 #ef076d, 4px 4px 0 #000000;
-    margin-bottom: 3rem;
+  h4.destacado{
+    
     text-align: center;
     position: relative;
 
+    //Para la barra de abajo
     &::after {
       content: '';
       display: block;
