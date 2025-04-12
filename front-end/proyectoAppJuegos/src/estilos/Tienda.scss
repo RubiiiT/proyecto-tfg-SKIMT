@@ -7,7 +7,18 @@
   padding: 2rem;
   min-height: 100vh;
   padding-top: 100px;
-  margin-top: 2%; 
+  margin-top: 2rem; 
+
+  h4{
+    color: white;
+    font-size: 1rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  h4.filtro{
+    margin-left: 40rem;
+  }
 
   .tituloLista {
     color: #EF076D;
@@ -68,24 +79,102 @@
     }
   }
 
-  /* Estilos para el carrusel */
   #carouselExampleIndicators {
-    width: 45%; /* Hacer el carrusel más ancho */
-    max-width: 100%; /* Asegura que no se sobrepase el ancho máximo */
-    margin: 0 auto; /* Centrar el carrusel */
+    width: 45%;
+    max-width: 100%; 
+    margin: 0 auto; 
+    margin-bottom: 2rem;
   }
 
   .carousel-inner {
-    width: 100%; /* Asegura que las imágenes ocupen todo el ancho */
+    width: 100%; 
   }
 
   .carousel-inner img {
-    height: 400px; /* Fijar la altura */
-    width: 100%; /* Asegura que ocupe todo el ancho */
-    object-fit: cover; /* Estirar la imagen */
+    height: 400px; 
+    width: 100%; 
+    object-fit: cover;
   }
 
+  .filtro {
+    margin-bottom: 2rem;
+  }
+  
+  .filtroForm {
+    display: flex;
+    align-items: baseline; 
+    gap: 10px; 
+    background-color: #5B4758; 
+    padding: 10px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10rem; 
+    width: 100%; 
+    max-width: 1200px; 
+    margin: 0 auto;
+    flex-wrap: nowrap; 
+    padding-bottom: 0px;
+  }
+  
+  .filtroForm .form-group {
+    flex: 1 1 150px;
+    display: flex;
+    flex-direction: column;
 
+  }
+  
+  .filtroForm .form-control {
+    padding: 8px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 13px; 
+    min-height: 35px; 
+
+  }
+  
+  .filtroForm button {
+    margin-top: 0; 
+    flex: 0 1 auto; 
+    padding: 8px 15px; 
+    font-size: 14px; 
+    background-color: #2e1928; 
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-height: 35px;
+  }
+  
+  .filtroForm button:hover {
+    background-color: #8a2be2; 
+  }
+  
+  .filtroForm .btn-secondary {
+    margin-left: 10px; 
+  }
+  
+  .filtroForm input, .filtroForm select {
+    width: 100%; 
+    max-width: 200px; 
+  }
+  
+  @media (max-width: 768px) {
+    .filtroForm {
+      flex-direction: column; 
+      gap: 10px; 
+    }
+  
+    .filtroForm .form-group {
+      flex: 1 1 100%;
+    }
+  
+    .filtroForm button {
+      width: 100%; 
+      margin-left: 0; 
+    }
+  }
+  
 }
 
 @media (max-width: 768px) {
