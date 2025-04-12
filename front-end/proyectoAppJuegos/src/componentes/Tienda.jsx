@@ -3,7 +3,7 @@ import axios from 'axios';
 import "../estilos/Tienda.scss";
 
 
-const Tienda = () => {
+const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
   
     const [juegos, setJuegos] = useState([]);
   

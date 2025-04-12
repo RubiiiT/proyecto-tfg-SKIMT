@@ -46,13 +46,21 @@
       padding: 0; /* Sin padding adicional */
       border: none; /* Eliminar borde */
       color: #EF076D;
-      box-shadow: 16px 16px 0 #1E1E1E;
+      box-shadow: 12px 12px 0 #1E1E1E;
       border-radius: 0.5rem;
       font-size: clamp(0.9rem, 2vw, 1.2rem); /* Hicimos los juegos más pequeños */
       transition: transform 0.2s ease;
 
       &:hover {
-        transform: scale(1.05); /* Aumenta el tamaño al pasar el ratón */
+        transform: translate(-2px, -2px);
+        box-shadow: 15px 15px 0 #000;
+        filter: brightness(1.1);
+      }
+
+      &:active {
+        transform: translate(5px, 5px);
+        box-shadow: 5px 5px 0 #000;
+        filter: brightness(0.9);
       }
 
       .nombreJuego {
