@@ -58,7 +58,7 @@ const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCar
     </div>
 
    
-        <CarritoLateral onClose={cambiarModal} isOpen={mostrarModal} juegosCarrito={juegosCarrito}></CarritoLateral>
+        <CarritoLateral onClose={cambiarModal} isOpen={mostrarModal} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></CarritoLateral>
   
     </>
   );
