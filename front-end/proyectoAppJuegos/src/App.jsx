@@ -13,7 +13,8 @@ import UseStorageState from './servicios/almacenamiento/UseStorageState'
 
 function App() {
 
-  const [usuarioActivo,setUsuarioActivo] = UseStorageState("usuarioActivo",null)
+  const [usuarioActivo,setUsuarioActivo] = UseStorageState("usuarioActivo",null);
+  const [juegosCarrito,setJuegosCarrito] = UseStorageState("juegosCarrito",[]);
   
   return (
    <>
@@ -21,7 +22,7 @@ function App() {
     Si existe el usuario, enseñamos le menu superior ya que no queremos que sea una ruta, 
     queremos que este siempre que se haya iniciado sesion
     */}
-    {usuarioActivo && <MenuSuperior usuarioActivo={usuarioActivo} />}
+    {usuarioActivo && <MenuSuperior usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}/>}
 
     <Routes>
     {/*
@@ -40,12 +41,15 @@ function App() {
       
     <Route path='/tienda' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
-    <Tienda></Tienda>
+    <Tienda juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Tienda>
     </RutaProtegida>
   } >
      </Route>
-   
-   <Route path='/errorInicioSesion' element={<PaginaErrorSinInicioSesion></PaginaErrorSinInicioSesion>}></Route>
+
+   {/*
+ <Route path='/errorInicioSesion' element={<PaginaErrorSinInicioSesion></PaginaErrorSinInicioSesion>}></Route>
+   */}
+  
    
    
    

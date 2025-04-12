@@ -3,7 +3,8 @@ import ServicioTienda from '../servicios/axios/ServicioTienda';
 import "../estilos/Tienda.scss";
 import { loadBootstrapCSS, loadBootstrapJS } from '../servicios/bootstrap/LoadBootstrap';
 
-const Tienda = () => {
+
+const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
   const [juegos, setJuegos] = useState([]);
   const [juegosSlider, setJuegosSlider] = useState([]);
 
@@ -56,6 +57,7 @@ const Tienda = () => {
                 style={{ maxHeight: '400px', objectFit: 'cover' }}
               />
             </div>
+
           ))}
         </div>
         <a
