@@ -4,6 +4,7 @@ import "../estilos/Tienda.scss";
 
 
 const Tienda = () => {
+  
     const [juegos, setJuegos] = useState([]);
   
     useEffect(() => {

@@ -33,15 +33,18 @@ public class UsuarioController {
     // usamos un mapa al estilo json
     //Este metodo recibe un token de usuario y lo verifica y devuelve el usuario
     @PostMapping("/inicioSesion")
-    public String verificarToken(@RequestBody Map<String, String> body) {
+    public Usuario verificarToken(@RequestBody Map<String, String> body) {
         String token = body.get("token");
         try {
             FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
             String uid = decodedToken.getUid();
             //devolver usuario con info cogida de la base de datos.
-            return "Token válido, UID: " + uid;
+            Usuario usuarioInicioSesion = repository.findByfirebaseUid(uid).get();
+            System.out.println(usuarioInicioSesion);
+            return usuarioInicioSesion;
         } catch (FirebaseAuthException e) {
-            return "Token inválido: " + e.getMessage();
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 

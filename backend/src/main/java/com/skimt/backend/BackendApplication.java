@@ -9,7 +9,7 @@ public class BackendApplication {
 
 	public static void main(String[] args) {
 		//InicializadoraBaseDatos.crearBaseDatos("bbdd_tfg");
-		//InicializadoraBaseDatos.insertarDatosPrueba("bbdd_tfg");
+		InicializadoraBaseDatos.insertarDatosPrueba("bbdd_tfg");
 
 		SpringApplication.run(BackendApplication.class, args);
 		

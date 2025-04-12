@@ -7,14 +7,14 @@ public class Resena {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long resena_id;  // Clave primaria
+    private Long resenaId;  // Clave primaria
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuarioId", nullable = false)
     private Usuario usuario;  // Relación con Usuario
 
     @ManyToOne
-    @JoinColumn(name = "juego_id", nullable = false)
+    @JoinColumn(name = "juegoId", nullable = false)
     private Juego juego;  // Relación con Juego
 
     @Column(length = 1000)
@@ -36,11 +36,11 @@ public class Resena {
 
     // Getters y Setters
     public Long getResena_id() {
-        return resena_id;
+        return resenaId;
     }
 
     public void setResena_id(Long resena_id) {
-        this.resena_id = resena_id;
+        this.resenaId = resena_id;
     }
 
     public Usuario getUsuario() {
@@ -78,7 +78,7 @@ public class Resena {
     @Override
     public String toString() {
         return "Resena{" +
-                "resena_id=" + resena_id +
+                "resena_id=" + resenaId +
                 ", usuario=" + usuario.getNombre() +
                 ", juego=" + juego.getDescripcion() +
                 ", descripcion='" + descripcion + '\'' +
