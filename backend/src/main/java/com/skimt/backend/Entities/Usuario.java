@@ -9,10 +9,10 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long usuario_id;
+    private Long usuarioId;
 
     @Column(nullable = false, unique = true)
-    private String firebase_uid;
+    private String firebaseUid;
 
     @Column(nullable = false, length = 100,unique = true)
     private String nombre;
@@ -38,8 +38,8 @@ public class Usuario {
 
     // Constructor con todos los campos
     public Usuario(Long usuario_id, String firebase_uid, String nombre, int dinero, String email) {
-        this.usuario_id = usuario_id;
-        this.firebase_uid = firebase_uid;
+        this.usuarioId = usuario_id;
+        this.firebaseUid = firebase_uid;
         this.nombre = nombre;
         this.dinero = dinero;
         this.email = email;
@@ -47,19 +47,19 @@ public class Usuario {
 
     // Getters y Setters
     public Long getUsuario_id() {
-        return usuario_id;
+        return usuarioId;
     }
 
     public void setUsuario_id(Long usuario_id) {
-        this.usuario_id = usuario_id;
+        this.usuarioId = usuario_id;
     }
 
     public String getFirebase_uid() {
-        return firebase_uid;
+        return firebaseUid;
     }
 
     public void setFirebase_uid(String firebase_uid) {
-        this.firebase_uid = firebase_uid;
+        this.firebaseUid = firebase_uid;
     }
 
     public String getNombre() {
@@ -97,8 +97,8 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "usuario_id=" + usuario_id +
-                ", firebase_uid='" + firebase_uid + '\'' +
+                "usuario_id=" + usuarioId +
+                ", firebase_uid='" + firebaseUid + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", dinero=" + dinero +
                 ", email='" + email + '\'' +

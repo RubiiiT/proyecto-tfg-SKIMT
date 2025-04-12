@@ -9,7 +9,7 @@ public class Juego {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long juego_id;
+    private Long juegoId;
 
     @Column(nullable = false, unique = true, length = 255)
     private String nombre;
@@ -40,7 +40,7 @@ public class Juego {
 
     // Constructor con todos los campos (incluyendo categoria)
     public Juego(Long juego_id, String nombre, int precio, String descripcion, String categoria, String portada, String video, String foto_larga) {
-        this.juego_id = juego_id;
+        this.juegoId = juego_id;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
@@ -52,11 +52,11 @@ public class Juego {
 
     // Getters y Setters
     public Long getJuego_id() {
-        return juego_id;
+        return juegoId;
     }
 
     public void setJuego_id(Long juego_id) {
-        this.juego_id = juego_id;
+        this.juegoId = juego_id;
     }
 
     public String getNombre() {
@@ -126,7 +126,7 @@ public class Juego {
     @Override
     public String toString() {
         return "Juego{" +
-                "juego_id=" + juego_id +
+                "juego_id=" + juegoId +
                 ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", descripcion='" + descripcion + '\'' +
