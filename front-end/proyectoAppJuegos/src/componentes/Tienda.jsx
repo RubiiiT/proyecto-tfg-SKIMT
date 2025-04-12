@@ -7,30 +7,68 @@ import { loadBootstrapCSS, loadBootstrapJS } from '../servicios/bootstrap/LoadBo
 const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
   const [juegos, setJuegos] = useState([]);
   const [juegosSlider, setJuegosSlider] = useState([]);
+  const [filtros, setFiltros] = useState({
+    nombre: '',
+    categoria: '',
+    precio: ''
+  });
 
-  //Cargas css y js de la pagina web bootstrap
+  // Cargas css y js de la página web bootstrap
   useEffect(() => {
     const loadBootstrap = async () => {
+
        loadBootstrapCSS();
       await loadBootstrapJS(); 
+
     };
 
     loadBootstrap();
-  }, []); 
+  }, []);
 
-  //Cargas los jeugos aleatorios
+  // Cargas los juegos aleatorios
   useEffect(() => {
     ServicioTienda.juegosAleatorios()
       .then(res => setJuegosSlider(res.data))
       .catch(err => console.error(err));
-  }, []); 
+  }, []);
 
-  //Cargas todos los juegos
+  // Cargas todos los juegos
   useEffect(() => {
     ServicioTienda.todosLosJuegos()
       .then(res => setJuegos(res.data))
       .catch(err => console.error(err));
-  }, []); 
+  }, []);
+
+  const manejarCambiosFiltros = (e) => {
+    const { name, value } = e.target;
+
+    const finalValue = name === "categoria" && value === "" ? null : value;
+
+    setFiltros((prevFiltros) => ({
+      ...prevFiltros,
+      [name]: finalValue
+    }));
+  };
+
+  const manejarSumbitFiltros = (e) => {
+    e.preventDefault();
+
+    ServicioTienda.obtenerJuegosFiltrados(filtros)
+      .then(res => setJuegos(res.data))
+      .catch(err => console.error(err));
+  };
+
+  const manejarReseteoFiltros = () => {
+    setFiltros({
+      nombre: '',
+      categoria: '',
+      precio: ''
+    });
+
+    ServicioTienda.todosLosJuegos()
+      .then(res => setJuegos(res.data))
+      .catch(err => console.error(err));
+  };
 
   const anadirJuegoCarrito =(juego)=>{
     console.log(juegosCarrito)
@@ -48,9 +86,55 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
 
   return (
     <div className="listaJuegos">
-      <h2 className="tituloLista">🎮 Juegos Destacados</h2>
 
-      <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel" >
+      <div className='filtro'>
+      <form onSubmit={manejarSumbitFiltros} className="filtroForm">
+        <div className="form-group">
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value={filtros.nombre}
+            onChange={manejarCambiosFiltros}
+            className="form-control"
+            placeholder="Nombre del Juego"  
+          />
+        </div>
+        <div className="form-group">
+          <select
+            id="categoria"
+            name="categoria"
+            value={filtros.categoria}
+            onChange={manejarCambiosFiltros}
+            className="form-control"
+          >
+            <option value="" disabled>Selecciona una categoría</option> 
+            <option value="accion">Acción</option>
+            <option value="aventura">Aventura</option>
+            <option value="deportes">Deportes</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <input
+            type="number"
+            id="precio"
+            name="precio"
+            value={filtros.precio}
+            onChange={manejarCambiosFiltros}
+            className="form-control"
+            min="0"
+            placeholder="Precio máximo" 
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">Aplicar Filtros</button>
+        <button type="button" onClick={manejarReseteoFiltros} className="btn btn-secondary">Reiniciar Filtros</button>
+      </form>
+      </div>
+
+
+     
+      <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+      <h4 className='destacado'>Juegos Destacados</h4>
         <ol className="carousel-indicators">
           {juegosSlider.map((juego, index) => (
             <li
@@ -93,8 +177,8 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
       </div>
 
 
+      <h4 className='filtro'>Juegos por filtrado</h4>
 
-      <h2 className="tituloLista">Juegos desde la base de datos:</h2>
       <ul className="lista">
         {juegos.map(juego => (
           <li key={juego.juego_id} className="juegoItem" onClick={()=>anadirJuegoCarrito(juego)}>
