@@ -9,7 +9,6 @@
     align-items: center;
     background-color: #251723; /* Sin transparencia */
     padding: 1rem 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     flex-wrap: wrap;
   
     .menuIzquierda,
@@ -86,9 +85,8 @@
               background-image: repeating-linear-gradient(
                 to right,
                 #EF076D,
-                #EF076D 5px,
-                transparent 5px,
-                transparent 10px
+                #EF076D 5px
+                
               );
               background-size: 10px 2px;
               background-repeat: repeat-x;

@@ -11,7 +11,7 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
   //Cargas css y js de la pagina web bootstrap
   useEffect(() => {
     const loadBootstrap = async () => {
-      await loadBootstrapCSS();
+       loadBootstrapCSS();
       await loadBootstrapJS(); 
     };
 
@@ -31,6 +31,20 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
       .then(res => setJuegos(res.data))
       .catch(err => console.error(err));
   }, []); 
+
+  const anadirJuegoCarrito =(juego)=>{
+    console.log(juegosCarrito)
+    //Comprobamos que no exista el juego en el carrito para no añadir 2 juegos iguales
+    if(juegosCarrito.some(item => item.nombre === juego.nombre)){
+      alert("Ya tienes este juego en el carrito")
+    }
+    else{
+      //Para que se mantengan los anteriores y se añada el nuevo juego
+      setJuegosCarrito(prevJuegos => [...prevJuegos, juego]);
+      alert("Juego añadido")
+    }
+   
+  }
 
   return (
     <div className="listaJuegos">
@@ -78,10 +92,12 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
         </a>
       </div>
 
+
+
       <h2 className="tituloLista">Juegos desde la base de datos:</h2>
       <ul className="lista">
         {juegos.map(juego => (
-          <li key={juego.juego_id} className="juegoItem">
+          <li key={juego.juego_id} className="juegoItem" onClick={()=>anadirJuegoCarrito(juego)}>
             <img className="portadaJuego" src={juego.portada} alt={juego.nombre} />
           </li>
         ))}
