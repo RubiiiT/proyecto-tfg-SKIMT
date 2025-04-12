@@ -14,7 +14,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/juegos", "/usuarios/inicioSesion","/usuarios").permitAll()
+                        .requestMatchers("/juegos", "/usuarios/inicioSesion","/usuarios","/juegos/aleatorios").permitAll()
                         .anyRequest().authenticated()
                 );
 
