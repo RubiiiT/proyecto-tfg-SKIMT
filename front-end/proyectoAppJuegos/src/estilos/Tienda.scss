@@ -15,13 +15,13 @@
     text-shadow:  2px 2px 0 #000000;
     font-weight: bold;
     letter-spacing: 2px;
-    width: 100%;
     text-align: left;
 
   }
 
   h4.filtro{
-  margin-left:35% ;
+  align-self: flex-start;
+  margin-left: 15%;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   }
 

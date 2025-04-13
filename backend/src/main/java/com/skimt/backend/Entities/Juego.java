@@ -35,6 +35,9 @@ public class Juego {
     @ManyToMany(mappedBy = "juegos")
     private Set<Usuario> usuarios = new HashSet<>();
 
+    @ManyToMany(mappedBy = "juegosPedidos")
+    private Set<Pedido> pedidos = new HashSet<>();
+
     // Constructor vacío
     public Juego() {}
 
@@ -121,6 +124,14 @@ public class Juego {
 
     public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override

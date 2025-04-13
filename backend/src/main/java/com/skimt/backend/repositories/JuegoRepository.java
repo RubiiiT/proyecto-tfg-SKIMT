@@ -15,7 +15,7 @@ public interface JuegoRepository extends JpaRepository<Juego,Long> {
 	// Método de consulta personalizado para filtrar juegos por nombre, categoría y precio
     List<Juego> findByNombreLikeAndCategoriaAndPrecioLessThanEqual(String nombre, String categoria, Double precio);
 
-    // Si quieres hacer filtros dinámicos más complejos, puedes hacer algo como esto:
+    //Metodo para le fintro de nombre
     @Query("SELECT j FROM Juego j WHERE " +
     		"(LOWER(j.nombre) LIKE LOWER(CONCAT(:nombre, '%')) OR :nombre IS NULL) AND " +
            "(j.categoria = :categoria OR :categoria IS NULL) AND " +

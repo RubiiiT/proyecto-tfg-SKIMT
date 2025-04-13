@@ -5,6 +5,9 @@ import { loadBootstrapCSS, loadBootstrapJS } from '../servicios/bootstrap/LoadBo
 
 
 const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
+
+
+  
   const [juegos, setJuegos] = useState([]);
   const [juegosSlider, setJuegosSlider] = useState([]);
   const [filtros, setFiltros] = useState({
