@@ -6,7 +6,7 @@ import Tienda from './componentes/Tienda'
 import { useState } from 'react'
 import { Route,Routes,Navigate } from 'react-router-dom'
 
-import PaginaErrorSinInicioSesion from './componentes/PaginaErrorSinInicioSesion'
+import Carrito from './componentes/Carrito'
 import RutaProtegida from './componentes/RutaProtegida'
 
 import UseStorageState from './servicios/almacenamiento/UseStorageState'
@@ -39,9 +39,16 @@ function App() {
         : <InicioSesion setUsuarioActivo={setUsuarioActivo} />
     }></Route>
       
-    <Route path='/tienda' element={ 
+      <Route path='/tienda' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
     <Tienda juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Tienda>
+    </RutaProtegida>
+  } >
+     </Route>
+
+     <Route path='/carrito' element={ 
+      <RutaProtegida usuarioActivo={usuarioActivo}>
+    <Carrito usuarioActivo={usuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Carrito>
     </RutaProtegida>
   } >
      </Route>

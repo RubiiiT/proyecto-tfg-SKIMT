@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import "../estilos/CarritoLateral.scss";
+import { useNavigate } from 'react-router-dom';
 
 // Componente CarritoLateral
 const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => {
+
   const [activo, setActivo] = useState(isOpen); // Usamos isOpen para iniciar el estado
 
+    // No renderizamos el componente si no está activo ni abierto
+    if (!activo && !isOpen) return null;
+
+    const navigate = useNavigate();
   const [totalPrecio, setTotalPrecio] = useState(0); // Para almacenar el total
 
+  
   useEffect(() => {
     // Calculamos el total cada vez que el carrito cambie
     const total = juegosCarrito.reduce((acc, juego) => acc + juego.precio, 0);
@@ -31,7 +38,7 @@ const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => 
 
   const cerrarCarrito = ()=>{
     setActivo(false);
-    
+    document.body.style.overflow = 'auto';
     setTimeout(() => {
         onClose(); // Esto se ejecuta después del tiempo de animación
       }, 500); // Espera 500ms (ajústalo a lo que dure tu animación en CSS)
@@ -42,13 +49,16 @@ const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => 
     const nuevosJuegos = juegosCarrito.filter((_, i) => i !== index);
     setJuegosCarrito(nuevosJuegos); // Actualiza el carrito sin el juego eliminado
   }
+
+  const irAComprar= ()=>{
+    cerrarCarrito();
+    navigate("/carrito");
+  }
   
 
-  // No renderizamos el componente si no está activo ni abierto
-  if (!activo && !isOpen) return null;
 
   return (
-    <div className='overlayFondo'>
+    <div className='overlayFondo' >
     <div className={`carritoLateral ${activo ? 'activo' : 'desactivo'}`}>
 
         <div className='parteSuperior'>
@@ -90,7 +100,7 @@ const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => 
            
             <h2>{totalPrecio} <img src="logoDivisa.png" alt="iconoMoneda" /> </h2>
             </div>
-            <button className="btnComprar" >Comprar</button>
+            <button className="btnComprar" onClick={()=>irAComprar()} >Ir al pago</button>
           </div>
 
     </div>

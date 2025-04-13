@@ -45,6 +45,15 @@
     overflow-y: auto;
     padding-right: 10px;
     }
+    ul::-webkit-scrollbar{
+      background-color: white;
+      border-radius: 10px;
+      width: 10px;
+  }
+  ul::-webkit-scrollbar-thumb {
+      background: #5D3855;
+      border-radius: 8px;
+    }
 
     li {
       margin-bottom: 10px;
@@ -114,6 +123,12 @@
       }
     
       p {
+
+        display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  
+
         margin-top: 5px;
         width: 80%;
         background-color:#96F527 ;

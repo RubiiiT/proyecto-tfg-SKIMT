@@ -28,8 +28,8 @@ public class Usuario {
     @ManyToMany
     @JoinTable(
             name = "usuario_juego", // Nombre de la tabla intermedia
-            joinColumns = @JoinColumn(name = "usuario_id"), // Clave foránea a la tabla Usuario
-            inverseJoinColumns = @JoinColumn(name = "juego_id") // Clave foránea a la tabla Juego
+            joinColumns = @JoinColumn(name = "usuarioId"), // Clave foránea a la tabla Usuario
+            inverseJoinColumns = @JoinColumn(name = "juegoId") // Clave foránea a la tabla Juego
     )
     private Set<Juego> juegos = new HashSet<>();
 
