@@ -3,13 +3,13 @@ import "../estilos/InicioSesion.scss";
 // Para el firebase
 import { auth } from "../config/firebaseConfig";
 import {signInWithEmailAndPassword} from "firebase/auth";
-import ServicioFirebase from '../servicios/axios/ServicioFirebase';
+import ServicioUsuario from '../servicios/axios/ServicioUsuario';
 //Para el modal del registro
 import Modal from './Modal';
 
 import Registro from './Registro';
 
-function InicioSesion({setUsuarioActivo}) {
+function InicioSesion({setUsuarioActivo,setJuegosBiblioteca}) {
   const [usuario, setUsuario] = useState("");
   const [contrasena, setContrasena] = useState("");
 
@@ -62,13 +62,14 @@ function InicioSesion({setUsuarioActivo}) {
 
       console.log("CONEXION BACK")
 
-      ServicioFirebase.inicioSesionBackEnd(token)
+      ServicioUsuario.inicioSesionBackEnd(token)
       .then(response=>{
         // 
         console.log("Respuesta del backend:", response.data);
         funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
         //Tengo que hacer que desde el back devuelva el usuario entero
         setUsuarioActivo(response.data)
+        setJuegosBiblioteca(response.data.juegos)
       })
       .catch(error=>{
         console.error("Error de autenticación: ", error.message);

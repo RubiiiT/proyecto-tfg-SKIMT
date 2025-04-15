@@ -4,9 +4,11 @@ import "../estilos/Tienda.scss";
 import { loadBootstrapCSS, loadBootstrapJS } from '../servicios/bootstrap/LoadBootstrap';
 
 
-const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
+const Tienda = ({usuarioActivo,juegosCarrito,setJuegosCarrito,juegosBiblioteca}) => {
 
+  console.log(usuarioActivo.juegos)
 
+  console.log(juegosCarrito)
   
   const [juegos, setJuegos] = useState([]);
   const [juegosSlider, setJuegosSlider] = useState([]);
@@ -74,10 +76,18 @@ const Tienda = ({juegosCarrito,setJuegosCarrito}) => {
   };
 
   const anadirJuegoCarrito =(juego)=>{
-    console.log(juegosCarrito)
+
+   
+ 
+    
+
     //Comprobamos que no exista el juego en el carrito para no añadir 2 juegos iguales
     if(juegosCarrito.some(item => item.nombre === juego.nombre)){
       alert("Ya tienes este juego en el carrito")
+    }
+    //Comprobamos que tampoco exista en nuesta biblioteca
+    else if (usuarioActivo.juegos.some(juegoBiblio => juegoBiblio.juego_id === juego.juego_id)) {
+      alert("Ya tienes este juego en tu biblioteca");
     }
     else{
       //Para que se mantengan los anteriores y se añada el nuevo juego

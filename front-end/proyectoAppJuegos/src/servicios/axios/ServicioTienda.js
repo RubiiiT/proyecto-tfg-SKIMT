@@ -1,14 +1,14 @@
 import http from "./http-axios.js";
 
-const API_URL = 'http://localhost:8080/juegos';
+const endPointBase = '/juegos';
 
 class ServicioTienda{
     todosLosJuegos(){
-    return http.get(API_URL)
+    return http.get(endPointBase)
    }
 
    obtenerJuegosFiltrados = (filtros) => {
-    return http.get(API_URL, {
+    return http.get(endPointBase, {
       params: filtros
     });
   };

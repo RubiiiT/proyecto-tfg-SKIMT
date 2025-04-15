@@ -10,7 +10,10 @@ const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => 
     // No renderizamos el componente si no está activo ni abierto
     if (!activo && !isOpen) return null;
 
+    //Para que nos lleve al compoente para pagar (carrito)
     const navigate = useNavigate();
+
+
   const [totalPrecio, setTotalPrecio] = useState(0); // Para almacenar el total
 
   

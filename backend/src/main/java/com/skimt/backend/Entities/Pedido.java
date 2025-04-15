@@ -26,14 +26,9 @@ public class Pedido {
     @Column(nullable = false)
     private int precioTotal;
 
-    // Relación ManyToMany con Juego
-    @ManyToMany
-    @JoinTable(
-            name = "pedido_juego", // Nombre de la tabla intermedia
-            joinColumns = @JoinColumn(name = "pedidoId"), // Clave foránea a la tabla Pedido
-            inverseJoinColumns = @JoinColumn(name = "juegoId") // Clave foránea a la tabla Juego
-    )
-    private Set<Juego> juegosPedidos = new HashSet<>();
+    //Relacion oneToMany aun que sea ManyToMany porque estamos creando manualmente nosotros la tabla intermedia
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private Set<PedidoJuego> juegosPedidos = new HashSet<>();
 
     public Pedido() {
     }

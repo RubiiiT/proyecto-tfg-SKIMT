@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import "../estilos/Carrito.scss";
 
+import { useNavigate } from 'react-router-dom';
+import ServicioPedido from '../servicios/axios/ServicioPedido';
 
-const Carrito = ({juegosCarrito ,setJuegosCarrito,usuarioActivo}) => {
+const Carrito = ({juegosCarrito ,setJuegosCarrito,usuarioActivo, setUsuarioActivo}) => {
 
  const [totalPrecio, setTotalPrecio] = useState(0); // Para almacenar el total
 
+ //Para que , una vez se haya hecho la compra, nos devuelva a la tienda
+  const navigate = useNavigate();
   
   useEffect(() => {
     // Calculamos el total cada vez que el carrito cambie
@@ -31,6 +35,41 @@ const Carrito = ({juegosCarrito ,setJuegosCarrito,usuarioActivo}) => {
   const comprarJuego = ()=>{
     if (usuarioActivo.dinero<totalPrecio){
         funcionAlerta("error","Error compra","No tienes suficiente dinero ")
+    }
+    else{
+      //Aqui guardamos el pedido en la tabla pedidos y en la intermedia, y tambien los juegos en la biblioteca del usuario
+      const fechaActual = new Date().toISOString().split('T')[0];
+      //Esto lo hacmeos para obtener solo el id y el precio de cada juego ya que solo necesitamos esa info para guardarlo en la base de datos
+      const juegosFormateados = juegosCarrito.map(juego => ({
+        juegoId: juego.juego_id,
+        precioUnitario: juego.precio
+      }));
+
+      ServicioPedido.crearPedido({
+        "usuarioId": usuarioActivo.usuario_id,
+        "fechaPedido": fechaActual,
+        precioTotal:totalPrecio,
+        juegos:juegosFormateados
+      })
+
+      .then((response)=>{
+        console.log("BIEN: "+response)
+        //Actualizamos el dinero y los juegos
+        setUsuarioActivo((prevUsuario) => ({
+          ...prevUsuario,
+          dinero: prevUsuario.dinero - totalPrecio,
+          juegos: [...prevUsuario.juegos, ...juegosCarrito],
+        }));
+        
+        setJuegosCarrito([])
+        
+        alert("Todo joya, juegos comprados")
+
+        navigate("/tienda")
+      })
+      .catch((error)=>{
+        console.log("ERROR: "+error)
+      })
     }
   }
 
