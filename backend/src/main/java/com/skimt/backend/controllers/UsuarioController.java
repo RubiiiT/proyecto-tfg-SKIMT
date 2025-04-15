@@ -3,6 +3,7 @@ package com.skimt.backend.controllers;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
+import com.skimt.backend.Entities.Juego;
 import com.skimt.backend.Entities.Usuario;
 import com.skimt.backend.repositories.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "http://localhost:3000")
 public class UsuarioController {
 
     private final UsuarioRepository repository;
@@ -84,4 +85,21 @@ public class UsuarioController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}/juegos")
+    public ResponseEntity<Usuario> anadirJuegosUsuario(@PathVariable Long id, @RequestBody Set<Juego> juegosNuevos) {
+        return repository.findById(id)
+                .map(usuarioExistente -> {
+                    //Aqui vamos a añadir los juegos al usuario
+                    Set<Juego> juegosUsuario = usuarioExistente.getJuegos();
+                    juegosUsuario.addAll(juegosNuevos);
+                    //Reemplazamos la lista anterior con la nueva lista con los juegos
+                    usuarioExistente.setJuegos(juegosUsuario);
+
+                    Usuario actualizado = repository.save(usuarioExistente);
+                    return ResponseEntity.ok(actualizado);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

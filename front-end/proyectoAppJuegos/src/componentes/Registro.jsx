@@ -3,7 +3,7 @@ import '../estilos/Registro.scss';
 //Para firebase
 import { auth } from "../config/firebaseConfig";
 import {deleteUser,createUserWithEmailAndPassword} from "firebase/auth";
-import ServicioFirebase from '../servicios/axios/ServicioFirebase';
+import ServicioUsuario from '../servicios/axios/ServicioUsuario';
 
 function Registro({onClose}) {
   // Estados para los campos
@@ -68,10 +68,10 @@ function Registro({onClose}) {
 
       console.log("CONEXION BACK")
 
-      ServicioFirebase.registroBackEnd({
+      ServicioUsuario.registroBackEnd({
         email: usuario.email,
         nombre: nombre,
-        dinero:0,
+        dinero:50000, //Cambiar despues a 0, puesto en 50000 para pruebas
         firebase_uid:usuario.uid
       })
       .then(response=>{

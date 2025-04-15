@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Route,Routes,Navigate } from 'react-router-dom'
 
 import Carrito from './componentes/Carrito'
+import Biblioteca from './componentes/Biblioteca'
 import RutaProtegida from './componentes/RutaProtegida'
 
 import UseStorageState from './servicios/almacenamiento/UseStorageState'
@@ -15,6 +16,7 @@ function App() {
 
   const [usuarioActivo,setUsuarioActivo] = UseStorageState("usuarioActivo",null);
   const [juegosCarrito,setJuegosCarrito] = UseStorageState("juegosCarrito",[]);
+  const [juegosBiblioteca,setJuegosBiblioteca] = UseStorageState("juegosBiblioteca",[]);
   
   return (
    <>
@@ -36,19 +38,27 @@ function App() {
       <Route path='/' element={
       usuarioActivo 
         ? <Navigate to="/tienda" />
-        : <InicioSesion setUsuarioActivo={setUsuarioActivo} />
+        : <InicioSesion setJuegosBiblioteca={setJuegosBiblioteca} setUsuarioActivo={setUsuarioActivo} />
     }></Route>
       
       <Route path='/tienda' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
-    <Tienda juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Tienda>
+    <Tienda usuarioActivo={usuarioActivo} juegosBiblioteca={juegosBiblioteca} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Tienda>
     </RutaProtegida>
   } >
      </Route>
 
      <Route path='/carrito' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
-    <Carrito usuarioActivo={usuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Carrito>
+    <Carrito setUsuarioActivo={setUsuarioActivo} usuarioActivo={usuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Carrito>
+    </RutaProtegida>
+  } >
+     </Route>
+
+
+     <Route path='/biblioteca' element={ 
+      <RutaProtegida usuarioActivo={usuarioActivo}>
+    <Biblioteca usuarioActivo={usuarioActivo}></Biblioteca>
     </RutaProtegida>
   } >
      </Route>

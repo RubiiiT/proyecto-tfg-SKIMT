@@ -1,5 +1,6 @@
 package com.skimt.backend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class Usuario {
     private String email;
 
     // Relación ManyToMany con Juego
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "usuario_juego", // Nombre de la tabla intermedia
             joinColumns = @JoinColumn(name = "usuarioId"), // Clave foránea a la tabla Usuario

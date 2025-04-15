@@ -1,5 +1,8 @@
 package com.skimt.backend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,11 +35,19 @@ public class Juego {
     @Column(length = 255)
     private String foto_larga;
 
-    @ManyToMany(mappedBy = "juegos")
+    //Aqui lo dejamos asi ya que la tabla intermedia solo tendra las claves entonces se puede dejar asi
+    @ManyToMany(mappedBy = "juegos", cascade = CascadeType.ALL)
+    @JsonIgnore  //Esto ultimo para el tema de recursividad ya que si luego intento recueprar juegos o usuarios, va a entrar en un bucle infinito
+    //Porque un juego tiene un array de usuarios que a su vez tiene un array de juegos y asi infinitamente
     private Set<Usuario> usuarios = new HashSet<>();
 
-    @ManyToMany(mappedBy = "juegosPedidos")
-    private Set<Pedido> pedidos = new HashSet<>();
+    //Relacion oneToMany aun que sea ManyToMany porque estamos creando manualmente nosotros
+    //la tabla intermedia porque tiene valores extras a aprte de las priamry keys
+    @OneToMany(mappedBy = "juego", cascade = CascadeType.ALL)
+    @JsonIgnore  //Esto ultimo para el tema de recursividad ya que si luego intento recueprar juegos o pedidos, va a entrar en un bucle infinito
+    //Porque un juego tiene un array de pedidos que a su vez tiene un array de juegos y asi infinitamente
+    private Set<PedidoJuego> pedidos = new HashSet<>();
+
 
     // Constructor vacío
     public Juego() {}
@@ -126,11 +137,11 @@ public class Juego {
         this.usuarios = usuarios;
     }
 
-    public Set<Pedido> getPedidos() {
+    public Set<PedidoJuego> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(Set<Pedido> pedidos) {
+    public void setPedidos(Set<PedidoJuego> pedidos) {
         this.pedidos = pedidos;
     }
 
