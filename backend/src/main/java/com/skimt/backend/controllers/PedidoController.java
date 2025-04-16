@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -49,6 +50,15 @@ public class PedidoController {
         if (usuarioOpt.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
+        //Cogemos el usuario para ver si algun juego de los del pedido está ya en la biblioteca
+        Usuario usuario = usuarioOpt.get();
+        for(Juego juegoBiblioteca: usuario.getJuegos()){
+            for(PedidoDTO.JuegoPedidoDTO juegoPedido : pedido.getJuegos()){
+                if(Objects.equals(juegoPedido.getJuegoId(), juegoBiblioteca.getJuego_id())){
+                    return ResponseEntity.badRequest().build();
+                }
+            }
+        }
 
         Pedido pedidoNuevo = new Pedido();
         pedidoNuevo.setUsuario(usuarioOpt.get());
@@ -56,11 +66,12 @@ public class PedidoController {
         pedidoNuevo.setCantidadJuegos(pedido.getJuegos().size());
         pedidoNuevo.setPrecioTotal(pedido.getPrecioTotal());
 
+
         //Guardamos el pedido para poder tener el id y relacionarlo en la otra tabla intermedia
         pedidoRepository.save(pedidoNuevo);
 
         //Guardamos los juegos para que el usuario los tenga
-        Usuario usuario = usuarioOpt.get();
+
         Set<Juego> juegosBibliotecaUsuario=usuario.getJuegos();
         for (PedidoDTO.JuegoPedidoDTO juegoDTO : pedido.getJuegos()) {
             Optional<Juego> juegoOpt = juegoRepository.findById(juegoDTO.getJuegoId());
