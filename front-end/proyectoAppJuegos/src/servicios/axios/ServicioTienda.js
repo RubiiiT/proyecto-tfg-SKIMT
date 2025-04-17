@@ -5,7 +5,7 @@ const endPointBase = '/juegos';
 class ServicioTienda{
     todosLosJuegos(){
     return http.get(endPointBase)
-   }
+   };
 
    obtenerJuegosFiltrados = (filtros) => {
     return http.get(endPointBase, {
@@ -15,6 +15,10 @@ class ServicioTienda{
 
    juegosAleatorios() {
     return http.get('/juegos/aleatorios');
+  };
+
+  obtenerJuegoPorId(id){
+    return http.get(`/juegos/${id}`)
   }
 }
 

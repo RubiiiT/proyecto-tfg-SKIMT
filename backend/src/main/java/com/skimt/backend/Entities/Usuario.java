@@ -25,6 +25,9 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 255)
     private String email;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Resena> resenas = new HashSet<>();
+
     // Relación ManyToMany con Juego
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -46,7 +49,18 @@ public class Usuario {
         this.email = email;
     }
 
+
+
     // Getters y Setters
+
+    public Set<Resena> getResenas() {
+        return resenas;
+    }
+
+    public void setResenas(Set<Resena> resenas) {
+        this.resenas = resenas;
+    }
+
     public Long getUsuario_id() {
         return usuarioId;
     }

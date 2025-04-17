@@ -3,21 +3,25 @@ import './App.css'
 import MenuSuperior from './componentes/MenuSuperior'
 import InicioSesion from './componentes/InicioSesion'
 import Tienda from './componentes/Tienda'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Route,Routes,Navigate } from 'react-router-dom'
 
 import Carrito from './componentes/Carrito'
 import Biblioteca from './componentes/Biblioteca'
+import TiendaJuegoEspecifico from './componentes/TiendaJuegoEspecifico'
 import RutaProtegida from './componentes/RutaProtegida'
 
 import UseStorageState from './servicios/almacenamiento/UseStorageState'
+
+import ServicioTienda from './servicios/axios/ServicioTienda'
 
 function App() {
 
   const [usuarioActivo,setUsuarioActivo] = UseStorageState("usuarioActivo",null);
   const [juegosCarrito,setJuegosCarrito] = UseStorageState("juegosCarrito",[]);
-  const [juegosBiblioteca,setJuegosBiblioteca] = UseStorageState("juegosBiblioteca",[]);
+  const [juegos, setJuegos] = useState([]);
   
+   
   return (
    <>
     {/*
@@ -38,12 +42,19 @@ function App() {
       <Route path='/' element={
       usuarioActivo 
         ? <Navigate to="/tienda" />
-        : <InicioSesion setJuegosBiblioteca={setJuegosBiblioteca} setUsuarioActivo={setUsuarioActivo} />
+        : <InicioSesion setUsuarioActivo={setUsuarioActivo} />
     }></Route>
       
       <Route path='/tienda' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
-    <Tienda usuarioActivo={usuarioActivo} juegosBiblioteca={juegosBiblioteca} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></Tienda>
+    <Tienda usuarioActivo={usuarioActivo} juegos={juegos} juegosCarrito={juegosCarrito} setJuegos={setJuegos}></Tienda>
+    </RutaProtegida>
+  } >
+     </Route>
+
+     <Route path='/tienda/:id' element={ 
+      <RutaProtegida usuarioActivo={usuarioActivo}>
+    <TiendaJuegoEspecifico juegos={juegos} usuarioActivo={usuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={juegosCarrito}></TiendaJuegoEspecifico>
     </RutaProtegida>
   } >
      </Route>
@@ -62,6 +73,8 @@ function App() {
     </RutaProtegida>
   } >
      </Route>
+
+     
 
    {/*
  <Route path='/errorInicioSesion' element={<PaginaErrorSinInicioSesion></PaginaErrorSinInicioSesion>}></Route>

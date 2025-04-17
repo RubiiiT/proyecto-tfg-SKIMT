@@ -41,7 +41,7 @@ const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCar
             </li>
             <li>
                 <h2>{usuarioActivo.dinero}</h2>
-                <img src="logoDivisa.png" alt="iconoMoneda" />
+                <img src="/logoDivisa.png" alt="iconoMoneda" />
             </li>
         </ul>
       </div>
@@ -55,7 +55,7 @@ const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCar
           <Link className="link" onClick={()=>cerrarSesion()}>Perfil</Link>
           </li>
           <li>
-            <a> <img className='fotoCarrito' src="logoCarrito.png" alt="carrito"onClick={()=>cambiarModal()} /></a>
+            <a> <img className='fotoCarrito' src="/logoCarrito.png" alt="carrito"onClick={()=>cambiarModal()} /></a>
           </li>
           
         </ul>
