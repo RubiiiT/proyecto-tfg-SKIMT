@@ -91,13 +91,13 @@ function InicioSesion({setUsuarioActivo}) {
         
         <div className='campos'>
         <div className="campo">
-          <label htmlFor="usuario">Usuario</label>
+          <label htmlFor="usuario">Correo</label>
           <input
             type="text"
             id="usuario"
             value={usuario}
             onChange={(e) => setUsuario(e.target.value)}
-            placeholder="Escribe tu usuario"
+            placeholder="Escribe tu correo"
           />
         </div>
 

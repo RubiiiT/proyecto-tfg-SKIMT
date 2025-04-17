@@ -14,11 +14,17 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers("/juegos",
                                 "/usuarios/inicioSesion",
-                                "/usuarios","/juegos/aleatorios",
-                                "usuarios/{id}/juegos","/pedidos",
-                                "/juegos/{id}").permitAll()
+                                "/usuarios",
+                                "/juegos/aleatorios",
+                                "usuarios/{id}/juegos",
+                                "/pedidos",
+                                "/juegos/{id}",
+                                "/juegos/{juegoId}/usuarios",
+                                "/juegos/por-nombre-y-usuario").permitAll()
+
                         .anyRequest().authenticated()
                 );
 
