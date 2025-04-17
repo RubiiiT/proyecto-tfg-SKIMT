@@ -34,6 +34,7 @@ public class Resena {
         this.puntuacion = puntuacion;
     }
 
+
     // Getters y Setters
     public Long getResena_id() {
         return resenaId;

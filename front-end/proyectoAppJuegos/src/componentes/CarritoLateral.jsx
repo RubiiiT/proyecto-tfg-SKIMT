@@ -67,7 +67,7 @@ const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => 
         <div className='parteSuperior'>
         <h2>Mi Carrito</h2>
            <button className="btnVolver" onClick={cerrarCarrito}>
-              <img src="flechaAtras.png" alt="Volver" />
+              <img src="/flechaAtras.png" alt="Volver" />
            </button>
           
        </div>
@@ -101,7 +101,7 @@ const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => 
             <div className='totalPrecio'>
             <h2>Total:</h2>
            
-            <h2>{totalPrecio} <img src="logoDivisa.png" alt="iconoMoneda" /> </h2>
+            <h2>{totalPrecio} <img src="/logoDivisa.png" alt="iconoMoneda" /> </h2>
             </div>
             <button className="btnComprar" onClick={()=>irAComprar()} >Ir al pago</button>
           </div>

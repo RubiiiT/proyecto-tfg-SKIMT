@@ -3,6 +3,7 @@ package com.skimt.backend.repositories;
 import com.skimt.backend.Entities.Juego;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JuegoRepository extends JpaRepository<Juego,Long> {
-	
-	// Método de consulta personalizado para filtrar juegos por nombre, categoría y precio
+
+    Optional<Juego> findByNombre(String nombre);
+
+
+    // Método de consulta personalizado para filtrar juegos por nombre, categoría y precio
     List<Juego> findByNombreLikeAndCategoriaAndPrecioLessThanEqual(String nombre, String categoria, Double precio);
 
     //Metodo para le fintro de nombre

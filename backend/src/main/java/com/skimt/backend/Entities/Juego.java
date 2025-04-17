@@ -35,6 +35,9 @@ public class Juego {
     @Column(length = 255)
     private String foto_larga;
 
+    @OneToMany(mappedBy = "juego", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Resena> resenas = new HashSet<>();
+
     //Aqui lo dejamos asi ya que la tabla intermedia solo tendra las claves entonces se puede dejar asi
     @ManyToMany(mappedBy = "juegos", cascade = CascadeType.ALL)
     @JsonIgnore  //Esto ultimo para el tema de recursividad ya que si luego intento recueprar juegos o usuarios, va a entrar en un bucle infinito
@@ -65,6 +68,15 @@ public class Juego {
     }
 
     // Getters y Setters
+
+    public Set<Resena> getResenas() {
+        return resenas;
+    }
+
+    public void setResenas(Set<Resena> resenas) {
+        this.resenas = resenas;
+    }
+
     public Long getJuego_id() {
         return juegoId;
     }

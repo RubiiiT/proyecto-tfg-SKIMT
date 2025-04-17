@@ -2,13 +2,16 @@ package com.skimt.backend.controllers;
 
 import com.skimt.backend.Entities.Juego;
 import com.skimt.backend.repositories.JuegoRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class JuegoController {
@@ -49,4 +52,12 @@ public class JuegoController {
 
         return cinco;
     }
+    @GetMapping("/juegos/{id}")
+    public ResponseEntity<Juego> getJuegoPorId(@PathVariable Long id) {
+        Optional<Juego> juegoOptional = repository.findById(id);
+        return juegoOptional
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

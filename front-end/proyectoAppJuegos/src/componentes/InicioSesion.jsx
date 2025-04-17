@@ -9,7 +9,7 @@ import Modal from './Modal';
 
 import Registro from './Registro';
 
-function InicioSesion({setUsuarioActivo,setJuegosBiblioteca}) {
+function InicioSesion({setUsuarioActivo}) {
   const [usuario, setUsuario] = useState("");
   const [contrasena, setContrasena] = useState("");
 
@@ -69,7 +69,6 @@ function InicioSesion({setUsuarioActivo,setJuegosBiblioteca}) {
         funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
         //Tengo que hacer que desde el back devuelva el usuario entero
         setUsuarioActivo(response.data)
-        setJuegosBiblioteca(response.data.juegos)
       })
       .catch(error=>{
         console.error("Error de autenticación: ", error.message);

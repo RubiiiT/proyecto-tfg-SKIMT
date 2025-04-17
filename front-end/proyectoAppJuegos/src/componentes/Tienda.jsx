@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import ServicioTienda from '../servicios/axios/ServicioTienda';
 import "../estilos/Tienda.scss";
 import { loadBootstrapCSS, loadBootstrapJS } from '../servicios/bootstrap/LoadBootstrap';
+import { useNavigate } from 'react-router-dom';
+
+const Tienda = ({usuarioActivo,juegosCarrito,juegos,setJuegos}) => {
 
 
-const Tienda = ({usuarioActivo,juegosCarrito,setJuegosCarrito,juegosBiblioteca}) => {
 
-  console.log(usuarioActivo.juegos)
 
-  console.log(juegosCarrito)
-  
-  const [juegos, setJuegos] = useState([]);
+ //Para que nos lleve al juego especifico
+     const navigate = useNavigate();
+
   const [juegosSlider, setJuegosSlider] = useState([]);
   const [filtros, setFiltros] = useState({
     nombre: '',
@@ -37,12 +38,12 @@ const Tienda = ({usuarioActivo,juegosCarrito,setJuegosCarrito,juegosBiblioteca})
       .catch(err => console.error(err));
   }, []);
 
-  // Cargas todos los juegos
-  useEffect(() => {
-    ServicioTienda.todosLosJuegos()
-      .then(res => setJuegos(res.data))
-      .catch(err => console.error(err));
-  }, []);
+ // Cargas todos los juegos
+ useEffect(() => {
+  ServicioTienda.todosLosJuegos()
+    .then(res => setJuegos(res.data))
+    .catch(err => console.error(err));
+}, []);
 
   const manejarCambiosFiltros = (e) => {
     const { name, value } = e.target;
@@ -75,27 +76,11 @@ const Tienda = ({usuarioActivo,juegosCarrito,setJuegosCarrito,juegosBiblioteca})
       .catch(err => console.error(err));
   };
 
-  const anadirJuegoCarrito =(juego)=>{
-
-   
- 
-    
-
-    //Comprobamos que no exista el juego en el carrito para no añadir 2 juegos iguales
-    if(juegosCarrito.some(item => item.nombre === juego.nombre)){
-      alert("Ya tienes este juego en el carrito")
-    }
-    //Comprobamos que tampoco exista en nuesta biblioteca
-    else if (usuarioActivo.juegos.some(juegoBiblio => juegoBiblio.juego_id === juego.juego_id)) {
-      alert("Ya tienes este juego en tu biblioteca");
-    }
-    else{
-      //Para que se mantengan los anteriores y se añada el nuevo juego
-      setJuegosCarrito(prevJuegos => [...prevJuegos, juego]);
-      alert("Juego añadido")
-    }
-   
+  const irAJuegoEspecifico =(juego)=>{
+    navigate(`/tienda/${juego.juego_id}`)
   }
+
+  
 
   return (
     <div className="listaJuegos">
@@ -194,7 +179,7 @@ const Tienda = ({usuarioActivo,juegosCarrito,setJuegosCarrito,juegosBiblioteca})
 
       <ul className="lista">
         {juegos.map(juego => (
-          <li key={juego.juego_id} className="juegoItem" onClick={()=>anadirJuegoCarrito(juego)}>
+          <li key={juego.juego_id} className="juegoItem" onClick={()=>irAJuegoEspecifico(juego)}>
             <img className="portadaJuego" src={juego.portada} alt={juego.nombre} />
           </li>
         ))}
