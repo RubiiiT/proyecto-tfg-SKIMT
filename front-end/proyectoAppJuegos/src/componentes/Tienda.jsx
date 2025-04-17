@@ -124,8 +124,8 @@ const Tienda = ({usuarioActivo,juegosCarrito,juegos,setJuegos}) => {
             placeholder="Precio máximo" 
           />
         </div>
-        <button type="submit" className="btn btn-primary">Aplicar Filtros</button>
-        <button type="button" onClick={manejarReseteoFiltros} className="btn btn-secondary">Reiniciar Filtros</button>
+        <button type="submit" className="btn1">Aplicar Filtros</button>
+        <button type="button" onClick={manejarReseteoFiltros} className="btn2">Reiniciar Filtros</button>
       </form>
       </div>
 

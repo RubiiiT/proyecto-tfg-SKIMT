@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ServicioBiblioteca from '../servicios/axios/ServicioBiblioteca';
 import '../estilos/Biblioteca.scss';
 
+import ServicioResena from '../servicios/axios/ServicioResena';
+
 const Biblioteca = ({ usuarioActivo }) => {
+
+  console.log(usuarioActivo)
+
   const [filtro, setFiltro] = useState('');
   const [juegosFiltrados, setJuegosFiltrados] = useState([]);
   const [juegoSeleccionado, setJuegoSeleccionado] = useState(null);
@@ -53,6 +58,23 @@ const Biblioteca = ({ usuarioActivo }) => {
   const handleVolver = () => {
     setJuegoSeleccionado(null);
   };
+
+  const crearResena = ()=>{
+    ServicioResena.crearResena(
+      {
+        usuarioId: usuarioActivo.usuario_id,
+        juegoId: juegoSeleccionado.juego_id,
+        descripcion: "Este juego es una obra maestra.",
+        puntuacion: 5
+      }
+    )
+    .then((response)=>{
+      alert("Todo joya "+response)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
   return (
     <div id="divBibliotecaPrincipal" className="biblioteca-container">
@@ -143,6 +165,9 @@ const Biblioteca = ({ usuarioActivo }) => {
                   )}
                 </ul>
               </div>
+            </div>
+            <div id='resenas'>
+                  <button onClick={()=>crearResena()}>Crear resena</button>
             </div>
 
           </div>

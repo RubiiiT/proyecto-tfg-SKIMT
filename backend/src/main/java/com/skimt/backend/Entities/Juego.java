@@ -36,6 +36,7 @@ public class Juego {
     private String foto_larga;
 
     @OneToMany(mappedBy = "juego", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<Resena> resenas = new HashSet<>();
 
     //Aqui lo dejamos asi ya que la tabla intermedia solo tendra las claves entonces se puede dejar asi
