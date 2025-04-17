@@ -84,12 +84,12 @@
 // MAIN
 .seccion-principal {
   flex-grow: 1;
-  padding: 2rem;
+ 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  height: 100vh; // Igual altura
+  height: 100%; // Igual altura
   overflow-y: auto; // Scroll separado del aside
 }
 
@@ -130,10 +130,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: transparent;
+  background-color: white;
   padding: 0;
   border: none;
-  color: #EF076D;
+  color: black;
   box-shadow: 12px 12px 0 #1E1E1E;
   border-radius: 0.5rem;
   font-size: clamp(0.9rem, 2vw, 1.2rem);
@@ -177,11 +177,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 2rem;
+  padding: 2rem 4rem;
+  width: 100%;
   color: #EF076D;
   text-align: center;
   height: 100vh;
-  overflow-y: auto;
+  
 
   .boton-volver {
     align-self: flex-start;
@@ -204,18 +205,22 @@
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 3%;
+  
+    padding-bottom: 2rem;
 
     .juego-portada-grande {
       width: 100%;
-      max-width: 80%;
-      height: auto;
+      max-width: 90%;
+      aspect-ratio: 3 / 1; /* Ancho 3, alto 1 = portada horizontal */
       border-radius: 1rem;
       box-shadow: 12px 12px 0 #1e1e1e;
       margin-bottom: 2rem;
+      display: block;
+      object-fit: cover;
     }
+    
+    
+
 
     .informacion-juego {
       width: 100%;

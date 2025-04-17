@@ -13,6 +13,7 @@ const TiendaJuegoEspecifico = ({usuarioActivo,juegosCarrito,setJuegosCarrito,jue
 
     const { id } = useParams();
 
+    const [resenas,setResenas] = useState([]);
     
     useEffect(()=>{
         ServicioTienda.obtenerJuegoPorId(id)
@@ -24,6 +25,10 @@ const TiendaJuegoEspecifico = ({usuarioActivo,juegosCarrito,setJuegosCarrito,jue
             console.log("algo salio mal "+error)
         })
     },[]);
+
+    useEffect(()=>{
+
+    })
    
 
   const anadirJuegoCarrito =()=>{
@@ -76,7 +81,7 @@ const TiendaJuegoEspecifico = ({usuarioActivo,juegosCarrito,setJuegosCarrito,jue
         <div id='divResenas'>
   <h1>Reseñas</h1>
   <div className="resenasGrid">
-    {juego.resenas && juego.resenas.length > 0 ? (
+    {resenas && resenas.length > 0 ? (
       juego.resenas.map((resena, index) => (
         <div className="resenaCard" key={index}>
           <h4>{resena.usuario}</h4>

@@ -71,7 +71,7 @@ public class JuegoController {
     }
     @GetMapping("/juegos/{id}")
     public ResponseEntity<Juego> getJuegoPorId(@PathVariable Long id) {
-        Optional<Juego> juegoOptional = repository.findById(id);
+        Optional<Juego> juegoOptional = juegoRepository.findById(id);
         return juegoOptional
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

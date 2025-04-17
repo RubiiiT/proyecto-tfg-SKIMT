@@ -1,7 +1,10 @@
 package com.skimt.backend.controllers;
 
+import com.skimt.backend.Entities.Juego;
 import com.skimt.backend.Entities.Resena;
+import com.skimt.backend.Entities.ResenaDTO;
 import com.skimt.backend.Entities.Usuario;
+import com.skimt.backend.repositories.JuegoRepository;
 import com.skimt.backend.repositories.ResenaRepository;
 import com.skimt.backend.repositories.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +19,12 @@ public class ResenaController {
 
     private final ResenaRepository resenaRepository;
     private final UsuarioRepository usuarioRepository;
+    private final JuegoRepository juegoRepository;
 
-    public ResenaController(ResenaRepository resenaRepository, UsuarioRepository usuarioRepository) {
+    public ResenaController(ResenaRepository resenaRepository, UsuarioRepository usuarioRepository,JuegoRepository juegoRepository) {
         this.resenaRepository = resenaRepository;
         this.usuarioRepository = usuarioRepository;
+        this.juegoRepository = juegoRepository;
     }
 
     @GetMapping
@@ -35,19 +40,32 @@ public class ResenaController {
     }
 
     @PostMapping
-    public ResponseEntity<Resena> createResena(@RequestBody Resena resena) {
-        // Si la reseña incluye un usuario, verificamos que exista
-        if (resena.getUsuario() != null) {
-            Optional<Usuario> usuario = usuarioRepository.findById(resena.getUsuario().getUsuario_id());
-            if (usuario.isEmpty()) {
-                return ResponseEntity.badRequest().build();
-            }
-            resena.setUsuario(usuario.get());
+    public ResponseEntity<?> crearResena(@RequestBody ResenaDTO resenaDTO) {
+
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(resenaDTO.getUsuarioId());
+        Optional<Juego> juegoOpt = juegoRepository.findById(resenaDTO.getJuegoId());
+
+        if (usuarioOpt.isEmpty() || juegoOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Usuario o juego no encontrados");
         }
-        Resena savedResena = resenaRepository.save(resena);
-        return ResponseEntity.ok(savedResena);
+
+        Resena nuevaResena = new Resena(
+                usuarioOpt.get(),
+                juegoOpt.get(),
+                resenaDTO.getDescripcion(),
+                resenaDTO.getPuntuacion()
+        );
+
+        Resena guardada = resenaRepository.save(nuevaResena);
+        return ResponseEntity.ok(guardada);
     }
 
+    // Hacer metodo para recuperar reseña dependiendo del id del juego
+    @GetMapping("/juego/{id}")
+    public ResponseEntity<Resena> getResenaByJuegoId(@PathVariable Long id) {
+        
+        return null;
+    }
 
 
     @DeleteMapping("/{id}")
