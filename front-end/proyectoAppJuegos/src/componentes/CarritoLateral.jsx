@@ -80,7 +80,7 @@ const CarritoLateral = ({ isOpen, onClose, juegosCarrito ,setJuegosCarrito}) => 
                   <img src={juego.portada} alt={juego.nombre} className="juego-imagen" />
                   <div className="juego-detalles">
                     <h3>{juego.nombre}</h3>
-                    <p>{juego.precio} <img src="logoDivisa.png" alt="iconoMoneda" /> </p>
+                    <p>{juego.precio} <img src="/logoDivisa.png" alt="iconoMoneda" /> </p>
                     <button 
                     className="btnEliminar" 
                     onClick={() => eliminarJuego(index)}

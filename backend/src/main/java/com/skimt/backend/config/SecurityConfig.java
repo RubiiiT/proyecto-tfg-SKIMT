@@ -24,7 +24,8 @@ public class SecurityConfig {
                                 "/juegos/{id}",
                                 "/juegos/{juegoId}/usuarios",
                                 "/juegos/por-nombre-y-usuario",
-                                "/resenas").permitAll()
+                                "/resenas",
+                                "/resenas/juego/{id}").permitAll()
 
                         .anyRequest().authenticated()
                 );

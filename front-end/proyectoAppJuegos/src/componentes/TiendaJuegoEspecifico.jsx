@@ -3,7 +3,7 @@ import ServicioTienda from '../servicios/axios/ServicioTienda';
 import "../estilos/TiendaJuegoEspecifico.scss";
 import { loadBootstrapCSS, loadBootstrapJS } from '../servicios/bootstrap/LoadBootstrap';
 
-
+import ServicioResena from '../servicios/axios/ServicioResena';
 
 import { useParams } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const TiendaJuegoEspecifico = ({usuarioActivo,juegosCarrito,setJuegosCarrito,jue
     useEffect(()=>{
         ServicioTienda.obtenerJuegoPorId(id)
         .then((response)=>{
-            console.log(response)
+           
             setJuego(response.data)
         })
         .catch((error)=>{
@@ -27,8 +27,15 @@ const TiendaJuegoEspecifico = ({usuarioActivo,juegosCarrito,setJuegosCarrito,jue
     },[]);
 
     useEffect(()=>{
-
-    })
+      ServicioResena.cogerResenaPorIdJuego(id)
+      .then((response)=>{
+        console.log(response)
+        setResenas(response.data)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },[id])
    
 
   const anadirJuegoCarrito =()=>{
@@ -82,11 +89,11 @@ const TiendaJuegoEspecifico = ({usuarioActivo,juegosCarrito,setJuegosCarrito,jue
   <h1>Reseñas</h1>
   <div className="resenasGrid">
     {resenas && resenas.length > 0 ? (
-      juego.resenas.map((resena, index) => (
+      resenas.map((resena, index) => (
         <div className="resenaCard" key={index}>
-          <h4>{resena.usuario}</h4>
-          <p>⭐ {resena.puntuacion} / 5</p>
-          <p>{resena.texto}</p>
+          <h4>Usuario: {resena.usuario.nombre}</h4>
+          <p>⭐ {resena.puntuacion} / 10</p>
+          <p>{resena.descripcion}</p>
         </div>
       ))
     ) : (

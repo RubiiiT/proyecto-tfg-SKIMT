@@ -54,7 +54,7 @@ function App() {
 
      <Route path='/tienda/:id' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
-    <TiendaJuegoEspecifico juegos={juegos} usuarioActivo={usuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={juegosCarrito}></TiendaJuegoEspecifico>
+    <TiendaJuegoEspecifico juegos={juegos} usuarioActivo={usuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}></TiendaJuegoEspecifico>
     </RutaProtegida>
   } >
      </Route>

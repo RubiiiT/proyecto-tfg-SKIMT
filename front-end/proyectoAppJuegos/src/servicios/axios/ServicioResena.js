@@ -9,7 +9,7 @@ class ServicioResena{
     }
 
     cogerResenaPorIdJuego(id){
-        return http.get()
+        return http.get(endPointBase+"/juego/"+id)
     }
 
 }

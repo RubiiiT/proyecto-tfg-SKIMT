@@ -84,8 +84,14 @@
       margin-top: 2rem;
       font-size: clamp(0.5rem, 1vw, 1.2rem);
 
+      .botonConfirmarAlerta{
+        background-color: #96F527;
+        color: #000;
+      }
+      
+      
       .btn {
-       
+             
         width: 40%;
         padding: 1rem 2rem;
         border-radius: 0.5rem;
@@ -99,30 +105,31 @@
           transform 0.1s ease,
           box-shadow 0.1s ease,
           filter 0.2s ease;
-
+      
         &:hover {
           transform: translate(-2px, -2px);
           box-shadow: 12px 12px 0 #000;
           filter: brightness(1.1);
         }
-
+      
         &:active {
           transform: translate(2px, 2px);
           box-shadow: 3px 3px 0 #000;
           filter: brightness(0.9);
         }
-
+      
         &#btnIniciarSesion {
           background-color: #96F527;
           color: #000;
           
         }
-
+      
         &#btnRegistrar {
           background-color: #EF076D;
           color: #fff;
         }
       }
+      
     }
   }
 }
@@ -169,8 +176,3 @@
   }
 }
 
-
-.botonConfirmarAlerta{
-  background-color: #96F527;
-  color: #000;
-}

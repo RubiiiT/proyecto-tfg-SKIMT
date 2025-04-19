@@ -148,10 +148,10 @@
     }
   
     .resenaCard {
-      background-color: #f7f7f7;
-      border-radius: 10px;
+      background-color: #5D3855;
+      border-radius: 5px;
       padding: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
       transition: transform 0.2s ease;
   
       &:hover {
@@ -166,7 +166,7 @@
   
       p {
         margin-top: 0.5rem;
-        color: #555;
+        color: #b8b6b6;
       }
     }
   }

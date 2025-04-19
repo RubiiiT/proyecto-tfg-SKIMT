@@ -3,6 +3,7 @@ import ServicioBiblioteca from '../servicios/axios/ServicioBiblioteca';
 import '../estilos/Biblioteca.scss';
 
 import ServicioResena from '../servicios/axios/ServicioResena';
+import FormularioResena from './FormularioResena';
 
 const Biblioteca = ({ usuarioActivo }) => {
 
@@ -18,7 +19,7 @@ const Biblioteca = ({ usuarioActivo }) => {
     setJuegoSeleccionado(null);
     setUsuariosConJuego([]);
   }, [usuarioActivo]);
-  
+
   useEffect(() => {
     const obtenerUsuarios = async () => {
       if (juegoSeleccionado && usuarioActivo) {
@@ -33,19 +34,19 @@ const Biblioteca = ({ usuarioActivo }) => {
     };
     obtenerUsuarios();
   }, [juegoSeleccionado, usuarioActivo]);
-  
+
 
   useEffect(() => {
     const obtenerJuegos = async () => {
       try {
-        const response = await ServicioBiblioteca.juegoPorNombre(filtro, usuarioActivo.usuario_id); 
+        const response = await ServicioBiblioteca.juegoPorNombre(filtro, usuarioActivo.usuario_id);
         setJuegosFiltrados(response.data);
       } catch (error) {
         console.error("Error al obtener juegos", error);
         setJuegosFiltrados([]);
       }
     };
-  
+
     if (usuarioActivo) {
       obtenerJuegos();
     }
@@ -59,7 +60,7 @@ const Biblioteca = ({ usuarioActivo }) => {
     setJuegoSeleccionado(null);
   };
 
-  const crearResena = ()=>{
+  const crearResena = () => {
     ServicioResena.crearResena(
       {
         usuarioId: usuarioActivo.usuario_id,
@@ -68,12 +69,12 @@ const Biblioteca = ({ usuarioActivo }) => {
         puntuacion: 5
       }
     )
-    .then((response)=>{
-      alert("Todo joya "+response)
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
+      .then((response) => {
+        alert("Todo joya " + response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
@@ -146,29 +147,31 @@ const Biblioteca = ({ usuarioActivo }) => {
                   alt={juegoSeleccionado.nombre}
                   className="juego-portada-grande"
                 />
+                <div className='ConjuntoInfoYJugadores'>
                 <div className="informacion-juego">
                   <h2 className="titulo-juego-detalle">{juegoSeleccionado.nombre}</h2>
                   <p className="descripcion-juego">{juegoSeleccionado.descripcion}</p>
                 </div>
+                {/* Usuarios con este juego */}
+                <div className="usuarios-con-juego">
+                  <h3>Usuarios con este juego</h3>
+                  <ul>
+                    {usuariosConJuego.length === 0 ? (
+                      <li>No hay otros usuarios con este juego.</li>
+                    ) : (
+                      usuariosConJuego.map((user) => (
+                        <li key={user.id}>{user.nombre}</li>
+                      ))
+                    )}
+                  </ul>
+                </div>
+                </div>
               </div>
 
-              {/* Usuarios con este juego */}
-              <div className="usuarios-con-juego">
-                <h3>Usuarios con este juego</h3>
-                <ul>
-                  {usuariosConJuego.length === 0 ? (
-                    <li>No hay otros usuarios con este juego.</li>
-                  ) : (
-                    usuariosConJuego.map((user) => (
-                      <li key={user.id}>{user.nombre}</li> 
-                    ))
-                  )}
-                </ul>
-              </div>
+
             </div>
-            <div id='resenas'>
-                  <button onClick={()=>crearResena()}>Crear resena</button>
-            </div>
+
+            <FormularioResena usuarioActivo={usuarioActivo} juego={juegoSeleccionado}></FormularioResena>
 
           </div>
         )}
