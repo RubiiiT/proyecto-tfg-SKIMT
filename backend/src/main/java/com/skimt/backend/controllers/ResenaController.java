@@ -10,8 +10,10 @@ import com.skimt.backend.repositories.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/resenas")
@@ -62,9 +64,25 @@ public class ResenaController {
 
     // Hacer metodo para recuperar reseña dependiendo del id del juego
     @GetMapping("/juego/{id}")
-    public ResponseEntity<Resena> getResenaByJuegoId(@PathVariable Long id) {
-        
-        return null;
+    public ResponseEntity<?> getResenaByJuegoId(@PathVariable Long id) {
+        Optional<Juego> juegoOptional = juegoRepository.findById(id);
+        if (juegoOptional.isEmpty()){
+            return ResponseEntity.badRequest().body("Juego no encontrado");
+        }
+        else{
+            Juego juegoResena = juegoOptional.get();
+            Set<Resena> listaResenas = new HashSet<>();
+
+            for(Resena resena : resenaRepository.findAll()){
+                if(resena.getJuego().equals(juegoResena)){
+                    listaResenas.add(resena);
+                }
+            }
+            if(listaResenas.isEmpty()){
+                return ResponseEntity.badRequest().body("No hay reseñas para este juego");
+            }
+            return ResponseEntity.ok(listaResenas);
+        }
     }
 
 

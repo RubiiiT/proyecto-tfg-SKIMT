@@ -1,5 +1,6 @@
 package com.skimt.backend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ public class Usuario {
     private String email;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<Resena> resenas = new HashSet<>();
 
     // Relación ManyToMany con Juego
