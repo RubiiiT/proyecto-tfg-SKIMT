@@ -30,6 +30,9 @@ public class Usuario {
     @JsonIgnore
     private Set<Resena> resenas = new HashSet<>();
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Pedido> pedidos = new HashSet<>();
+
     // Relación ManyToMany con Juego
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -54,6 +57,15 @@ public class Usuario {
 
 
     // Getters y Setters
+
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 
     public Set<Resena> getResenas() {
         return resenas;

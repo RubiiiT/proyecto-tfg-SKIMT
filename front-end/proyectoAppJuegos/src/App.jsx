@@ -12,6 +12,7 @@ import TiendaJuegoEspecifico from './componentes/TiendaJuegoEspecifico'
 import RutaProtegida from './componentes/RutaProtegida'
 
 import UseStorageState from './servicios/almacenamiento/UseStorageState'
+import Perfil from './componentes/Perfil'
 
 import ServicioTienda from './servicios/axios/ServicioTienda'
 
@@ -74,7 +75,12 @@ function App() {
   } >
      </Route>
 
-     
+     <Route path='/perfil' element={ 
+      <RutaProtegida usuarioActivo={usuarioActivo}>
+        <Perfil usuarioActivo={usuarioActivo} setJuegosCarrito={setJuegosCarrito} setUsuarioActivo={setUsuarioActivo}></Perfil>
+    </RutaProtegida>
+  } >
+     </Route>
 
    {/*
  <Route path='/errorInicioSesion' element={<PaginaErrorSinInicioSesion></PaginaErrorSinInicioSesion>}></Route>

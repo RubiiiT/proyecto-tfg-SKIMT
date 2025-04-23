@@ -10,10 +10,7 @@ const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCar
 
   const cambiarModal = () => setMostrarModal(!mostrarModal);
 
-  const cerrarSesion = ()=>{
-    setJuegosCarrito([])
-    setUsuarioActivo(null)
-  }
+ 
 
   return (
     <>
@@ -52,7 +49,7 @@ const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCar
             Ahora el apartado de perfil lo que hara es cerrar sesion por temas de pruebas pero luego tendra que 
             abrir otra pagg con la info de l perfil y quetambien pueda cerrar sesion
             */}
-          <Link className="link" onClick={()=>cerrarSesion()}>Perfil</Link>
+          <Link className="link" to="/perfil" >Perfil</Link>
           </li>
           <li>
             <a> <img className='fotoCarrito' src="/logoCarrito.png" alt="carrito"onClick={()=>cambiarModal()} /></a>

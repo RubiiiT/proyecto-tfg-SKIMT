@@ -43,6 +43,12 @@ public class PedidoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/usuario/{id}")
+    public Set<Pedido> getPedidosByIdUsuario(@PathVariable Long id) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+        return usuarioOptional.map(Usuario::getPedidos).orElse(null);
+    }
+
     @PostMapping
     public ResponseEntity<Pedido> createPedidoConRelacionesJuegos(@RequestBody PedidoDTO pedido) {
 
@@ -95,6 +101,7 @@ public class PedidoController {
 
         return ResponseEntity.ok(pedidoNuevo);
     }
+
 
 
 

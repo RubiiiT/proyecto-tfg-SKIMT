@@ -1,5 +1,6 @@
 package com.skimt.backend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -14,6 +15,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "usuarioId", nullable = false)
+    @JsonIgnore
     private Usuario usuario;
 
 
@@ -28,6 +30,7 @@ public class Pedido {
 
     //Relacion oneToMany aun que sea ManyToMany porque estamos creando manualmente nosotros la tabla intermedia
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<PedidoJuego> juegosPedidos = new HashSet<>();
 
     public Pedido() {
@@ -39,6 +42,14 @@ public class Pedido {
         this.cantidadJuegos = cantidadJuegos;
         this.precioTotal = precioTotal;
         this.fechaPedido = fechaPedido;
+    }
+
+    public Set<PedidoJuego> getJuegosPedidos() {
+        return juegosPedidos;
+    }
+
+    public void setJuegosPedidos(Set<PedidoJuego> juegosPedidos) {
+        this.juegosPedidos = juegosPedidos;
     }
 
     public String getFechaPedido() {
