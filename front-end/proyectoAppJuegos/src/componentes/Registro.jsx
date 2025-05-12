@@ -5,6 +5,8 @@ import { auth } from "../config/firebaseConfig";
 import {deleteUser,createUserWithEmailAndPassword} from "firebase/auth";
 import ServicioUsuario from '../servicios/axios/ServicioUsuario';
 
+import { mostrarAlerta } from '../utilities/alertas';
+
 function Registro({onClose}) {
   // Estados para los campos
   const [nombre, setNombre] = useState('');
@@ -83,7 +85,7 @@ function Registro({onClose}) {
       })
       .catch(error=>{
         console.error("Error de autenticación: ", error.message);
-        funcionAlerta("error", "Error de autenticación", error.message);
+        mostrarAlerta("error", "Error de autenticación", error.message);
          //Borrando el usuario ya que , si falla el back, aun asi crea el usuario porque se crea primero y luego va al back
       try {
         usuario.delete();
@@ -97,9 +99,9 @@ function Registro({onClose}) {
      
     } catch (error) {
       if(error.code === "auth/email-already-in-use"){
-        funcionAlerta("error", "El email ya está registrado");
+        mostrarAlerta("error", "El email ya está registrado");
       }else{
-        funcionAlerta("error", "Error de registro", error.message);
+        mostrarAlerta("error", "Error de registro", error.message);
         console.error("Error de autenticación: ", error.code);
       }
       
@@ -108,15 +110,6 @@ function Registro({onClose}) {
     }
   }
 
-  const funcionAlerta = (icono,titulo,texto)=>{
-    Swal.fire({ icon: icono, title: titulo, text: texto,
-        
-      color:"#EF076D",
-      customClass: {
-       confirmButton: 'botonConfirmarAlerta'
-     }
-     });
-  }
 
   return (
     <div className="pantallaRegistro">

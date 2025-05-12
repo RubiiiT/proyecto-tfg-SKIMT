@@ -4,6 +4,8 @@ import "../estilos/Carrito.scss";
 import { useNavigate } from 'react-router-dom';
 import ServicioPedido from '../servicios/axios/ServicioPedido';
 
+import { mostrarAlerta } from '../utilities/alertas';
+
 const Carrito = ({juegosCarrito ,setJuegosCarrito,usuarioActivo, setUsuarioActivo}) => {
 
  const [totalPrecio, setTotalPrecio] = useState(0); // Para almacenar el total
@@ -22,19 +24,11 @@ const Carrito = ({juegosCarrito ,setJuegosCarrito,usuarioActivo, setUsuarioActiv
     const nuevosJuegos = juegosCarrito.filter((_, i) => i !== index);
     setJuegosCarrito(nuevosJuegos); // Actualiza el carrito sin el juego eliminado
   }
-  const funcionAlerta = (icono,titulo,texto)=>{
-    Swal.fire({ icon: icono, title: titulo, text: texto,
-        
-      color:"#EF076D",
-      customClass: {
-       confirmButton: 'botonConfirmarAlerta'
-     }
-     });
-  }
+  
 
   const comprarJuego = ()=>{
     if (usuarioActivo.dinero<totalPrecio){
-        funcionAlerta("error","Error compra","No tienes suficiente dinero ")
+      mostrarAlerta("error","Error compra","No tienes suficiente dinero ")
     }
     else{
       //Aqui guardamos el pedido en la tabla pedidos y en la intermedia, y tambien los juegos en la biblioteca del usuario
@@ -59,11 +53,13 @@ const Carrito = ({juegosCarrito ,setJuegosCarrito,usuarioActivo, setUsuarioActiv
           ...prevUsuario,
           dinero: prevUsuario.dinero - totalPrecio,
           juegos: [...prevUsuario.juegos, ...juegosCarrito],
+          pedidos : [...prevUsuario.pedidos,response.data]
         }));
         
         setJuegosCarrito([])
         
-        alert("Todo joya, juegos comprados")
+        mostrarAlerta("success","Pedido realizado con exito")
+        
 
         navigate("/tienda")
       })

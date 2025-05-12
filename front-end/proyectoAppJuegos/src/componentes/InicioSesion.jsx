@@ -9,6 +9,9 @@ import Modal from './Modal';
 
 import Registro from './Registro';
 
+
+import { mostrarAlerta } from '../utilities/alertas';
+
 function InicioSesion({setUsuarioActivo}) {
   const [usuario, setUsuario] = useState("");
   const [contrasena, setContrasena] = useState("");
@@ -24,25 +27,18 @@ function InicioSesion({setUsuarioActivo}) {
    
   };
 
-  const funcionAlerta = (icono,titulo,texto)=>{
-    Swal.fire({ icon: icono, title: titulo, text: texto,
-        
-      color:"#EF076D",
-      customClass: {
-       confirmButton: 'botonConfirmarAlerta'
-     }
-     });
-  }
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (usuario.length === 0 && contrasena.length === 0) {
-      funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene los dos campos");
+      
+      mostrarAlerta("error", "Error Inicio de Sesión", "Por favor, rellene los dos campos");
     } else if (usuario.length === 0) {
-      funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de usuario");
+      mostrarAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de usuario");
     } else if (contrasena.length === 0) {
-      funcionAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de contraseña");
+      mostrarAlerta("error", "Error Inicio de Sesión", "Por favor, rellene el campo de contraseña");
     } else {
       
       inicioSesionFirebase()
@@ -66,19 +62,19 @@ function InicioSesion({setUsuarioActivo}) {
       .then(response=>{
         // 
         console.log("Respuesta del backend:", response.data);
-        funcionAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
+        mostrarAlerta("success", "Inicio de sesión exitoso", `Bienvenido, ${usuario}`);
         //Tengo que hacer que desde el back devuelva el usuario entero
         setUsuarioActivo(response.data)
       })
       .catch(error=>{
         console.error("Error de autenticación: ", error.message);
-        funcionAlerta("error", "Error de autenticación", error.message);
+        mostrarAlerta("error", "Error de autenticación", error.message);
       
       })
 
      
     } catch (error) {
-      funcionAlerta("error", "Error de autenticación", error.message);
+      mostrarAlerta("error", "Error de autenticación", error.message);
       console.error("Error de autenticación: ", error.message);
     }
   }

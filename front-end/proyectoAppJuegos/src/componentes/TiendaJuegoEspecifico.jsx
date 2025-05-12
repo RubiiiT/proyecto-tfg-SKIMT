@@ -3,6 +3,8 @@ import ServicioTienda from '../servicios/axios/ServicioTienda';
 import "../estilos/TiendaJuegoEspecifico.scss";
 import { loadBootstrapCSS, loadBootstrapJS } from '../servicios/bootstrap/LoadBootstrap';
 
+import { mostrarAlerta } from '../utilities/alertas';
+
 import ServicioResena from '../servicios/axios/ServicioResena';
 
 import { useParams } from 'react-router-dom';
@@ -42,16 +44,18 @@ const TiendaJuegoEspecifico = ({usuarioActivo,juegosCarrito,setJuegosCarrito,jue
 
     //Comprobamos que no exista el juego en el carrito para no añadir 2 juegos iguales
     if(juegosCarrito.some(item => item.nombre === juego.nombre)){
-      alert("Ya tienes este juego en el carrito")
+      mostrarAlerta("warning","Juego no disponible","Ya tienes este juego en el carrito")
+      
     }
     //Comprobamos que tampoco exista en nuesta biblioteca
     else if (usuarioActivo.juegos.some(juegoBiblio => juegoBiblio.juego_id === juego.juego_id)) {
-      alert("Ya tienes este juego en tu biblioteca");
+      mostrarAlerta("warning","Juego no disponible","Ya tienes este juego en la biblioteca")
     }
     else{
       //Para que se mantengan los anteriores y se añada el nuevo juego
       setJuegosCarrito(prevJuegos => [...prevJuegos, juego]);
-      alert("Juego añadido")
+      mostrarAlerta("success","Juego añadido","El juego "+juego.nombre+" ha sido añadido con exito")
+      
     }
    
   }

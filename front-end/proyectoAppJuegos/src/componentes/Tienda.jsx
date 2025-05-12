@@ -140,6 +140,7 @@ const Tienda = ({usuarioActivo,juegosCarrito,juegos,setJuegos}) => {
               data-target="#carouselExampleIndicators"
               data-slide-to={index}
               className={index === 0 ? 'active' : ''}
+              
             ></li>
           ))}
         </ol>
@@ -151,6 +152,7 @@ const Tienda = ({usuarioActivo,juegosCarrito,juegos,setJuegos}) => {
                 src={juego.foto_larga}
                 alt={juego.nombre}
                 style={{ maxHeight: '400px', objectFit: 'cover' }}
+                onClick={()=>irAJuegoEspecifico(juego)}
               />
             </div>
 

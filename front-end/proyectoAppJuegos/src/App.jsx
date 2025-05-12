@@ -14,7 +14,10 @@ import RutaProtegida from './componentes/RutaProtegida'
 import UseStorageState from './servicios/almacenamiento/UseStorageState'
 import Perfil from './componentes/Perfil'
 
+import Chat from './componentes/Chat'
+
 import ServicioTienda from './servicios/axios/ServicioTienda'
+
 
 function App() {
 
@@ -30,7 +33,7 @@ function App() {
     queremos que este siempre que se haya iniciado sesion
     */}
     {usuarioActivo && <MenuSuperior usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo} juegosCarrito={juegosCarrito} setJuegosCarrito={setJuegosCarrito}/>}
-
+      {usuarioActivo && <Chat usuarioActivo={usuarioActivo}></Chat>}
     <Routes>
     {/*
    Ponemos como ruta principal el inicio de sesion.

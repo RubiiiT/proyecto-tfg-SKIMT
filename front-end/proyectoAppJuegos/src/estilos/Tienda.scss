@@ -101,13 +101,32 @@
 
   .carousel-inner {
     width: 100%; 
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 6px 6px 0 #1E1E1E;
+
+    border-radius: 0.5rem;
+    
+    &:hover {
+
+      transform: translate(-2px, -2px);
+      box-shadow: 10px 10px 0 #000;
+      filter: brightness(1.1);
+    }
+
+    &:active {
+      transform: translate(5px, 5px);
+      box-shadow: 5px 5px 0 #000;
+      filter: brightness(0.9);
+
+
+    }
   }
 
   .carousel-inner img {
     height: 400px; 
     width: 100%; 
     object-fit: cover;
+
+    
     
   }
 
