@@ -60,10 +60,14 @@
   
     /* Mensajes de error */
     .error {
-      color: #96F527;
+      background-color: #96F527;
+      color: black;
       font-size: 1.3rem;
       margin-bottom: 1rem;
       font-weight: bold;
+      width: 112%;
+      text-align: center;
+      padding: 10px;
     }
   
     /* Botones de acción */
