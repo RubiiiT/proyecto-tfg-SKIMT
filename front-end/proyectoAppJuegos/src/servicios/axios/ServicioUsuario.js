@@ -3,6 +3,10 @@ import http from "./http-axios.js";
 const endPointBase = '/usuarios';
 
 class ServicioUsuario{
+
+   getUsuarios(){
+      return http.get(endPointBase)
+   }
    
    inicioSesionBackEnd(token){
     return http.post(endPointBase+"/inicioSesion",{token});
