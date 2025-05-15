@@ -20,6 +20,10 @@ class ServicioTienda{
   obtenerJuegoPorId(id){
     return http.get(`/juegos/${id}`)
   }
+
+  obtenerJuegosDeUsuario(idUsuario){
+    return http.get(endPointBase+"/usuario/"+idUsuario)
+  }
 }
 
 export default new ServicioTienda();

@@ -6,10 +6,12 @@ import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.auth.UserRecord;
 import com.skimt.backend.Entities.Juego;
 import com.skimt.backend.Entities.Usuario;
+import com.skimt.backend.Entities.UsuarioDTO;
 import com.skimt.backend.repositories.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +30,16 @@ public class UsuarioController {
     @GetMapping
     public List<Usuario> getUsuarios() {
         return repository.findAll();
+    }
+
+    @GetMapping("/paraChat")
+    public List<UsuarioDTO> getUsuariosDto(){
+        List<UsuarioDTO> usuariosDto = new ArrayList<>();
+
+        for( Usuario usuario: repository.findAll()){
+            usuariosDto.add(usuario.transformarAUsuarioDTO());
+        }
+        return usuariosDto;
     }
 
 

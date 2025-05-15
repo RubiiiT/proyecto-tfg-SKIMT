@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class JuegoController {
@@ -75,6 +72,14 @@ public class JuegoController {
         return juegoOptional
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/juegos/usuario/{id}")
+    public ResponseEntity<Set<Juego>> getJuegosPorUsuarioId(@PathVariable Long id) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+        return usuarioOptional.map(usuario -> ResponseEntity.ok(usuario.getJuegos())).orElseGet(() -> ResponseEntity.notFound().build());
+
+
     }
 
 }

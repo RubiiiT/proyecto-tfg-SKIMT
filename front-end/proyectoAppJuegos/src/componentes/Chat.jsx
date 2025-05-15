@@ -7,6 +7,7 @@ import ServicioUsuario from '../servicios/axios/ServicioUsuario';
 
 const Chat = ({ usuarioActivo }) => {
 
+    
 
   const [usuarios,setUsuarios] = useState([])
 
@@ -15,25 +16,36 @@ const Chat = ({ usuarioActivo }) => {
   const [mostrar, setMostrar] = useState(false)
  
   const [textoMostrar,setTextoMostrar] =useState("abrir chat")
+
+ 
+
+  const [mensaje, setMensaje] = useState('');
+  const [mensajes, setMensajes] = useState([]);
+  const chatRef = useRef(null);
+
+   
   const mostrarOcultar = ()=>{
     setMostrar(!mostrar)
     if (textoMostrar=="abrir chat"){
       setTextoMostrar("cerrar chat")
     }else{
       setTextoMostrar("abrir chat")
+      setUsuarioDestinatario(null)
+      setMensaje("")
+      setMensajes([])
     }
   }
-
-  const [mensaje, setMensaje] = useState('');
-  const [mensajes, setMensajes] = useState([]);
-  const chatRef = useRef(null);
 
   //Lectura de mensajes
   useEffect(() => {
     if (!usuarioActivo || !usuarioDestinatario) return;
   
+    console.log(usuarioDestinatario)
+
     const conversacionId = [usuarioActivo.firebase_uid, usuarioDestinatario.firebase_uid].sort().join('_');
   
+
+    console.log(conversacionId)
     const q = query(collection(db, 'conversaciones', conversacionId, 'mensajes'), orderBy('timestamp'));
   
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -67,6 +79,7 @@ const Chat = ({ usuarioActivo }) => {
   const enviarMensaje = async (e) => {
     e.preventDefault();
   
+        
     if (!mensaje.trim() || !usuarioDestinatario) return;
   
     const conversacionId = [usuarioActivo.firebase_uid, usuarioDestinatario.firebase_uid].sort().join('_');
@@ -101,7 +114,6 @@ const Chat = ({ usuarioActivo }) => {
       {mostrar && (
         <>
         <div className='divMensajesYPersonas'>
-        
 
          <div className="chat-widget__mensajes" ref={chatRef}>
         {mensajes.map(msg => (

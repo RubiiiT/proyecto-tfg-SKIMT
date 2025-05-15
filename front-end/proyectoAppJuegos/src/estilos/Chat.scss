@@ -10,9 +10,15 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 1000;
+    z-index: 2;
     font-family: sans-serif;
   }
+  .chat-widget__destinatario{
+    width: 100%;
+    background-color: #ef076d;
+    color:white;
+  }
+
 
   .divMensajesYPersonas{
     display: flex;
@@ -36,8 +42,9 @@
         transition: background 0.2s;
   
         &:hover {
-          background-color: #3a3a3a;
+          background-color: #ef076d;
         }
+
       }
     }
   }

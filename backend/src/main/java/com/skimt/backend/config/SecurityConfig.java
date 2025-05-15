@@ -18,6 +18,7 @@ public class SecurityConfig {
                         .requestMatchers("/juegos",
                                 "/usuarios/inicioSesion",
                                 "/usuarios",
+                                "/usuarios/paraChat",
                                 "/juegos/aleatorios",
                                 "usuarios/{id}/juegos",
                                 "/pedidos",
