@@ -35,7 +35,6 @@ public class Usuario {
 
     // Relación ManyToMany con Juego
     @ManyToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     @JoinTable(
             name = "usuario_juego", // Nombre de la tabla intermedia
             joinColumns = @JoinColumn(name = "usuarioId"), // Clave foránea a la tabla Usuario
@@ -133,5 +132,9 @@ public class Usuario {
                 ", dinero=" + dinero +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public UsuarioDTO transformarAUsuarioDTO(){
+        return new UsuarioDTO(usuarioId,nombre,firebaseUid,email);
     }
 }

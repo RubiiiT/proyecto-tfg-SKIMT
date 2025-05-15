@@ -5,7 +5,7 @@ const endPointBase = '/usuarios';
 class ServicioUsuario{
 
    getUsuarios(){
-      return http.get(endPointBase)
+      return http.get(endPointBase+"/paraChat")
    }
    
    inicioSesionBackEnd(token){

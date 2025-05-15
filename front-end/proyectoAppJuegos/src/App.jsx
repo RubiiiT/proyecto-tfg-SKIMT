@@ -24,7 +24,8 @@ function App() {
   const [usuarioActivo,setUsuarioActivo] = UseStorageState("usuarioActivo",null);
   const [juegosCarrito,setJuegosCarrito] = UseStorageState("juegosCarrito",[]);
   const [juegos, setJuegos] = useState([]);
-  
+
+
    
   return (
    <>
