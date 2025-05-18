@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../estilos/CarritoLateral.scss";
+import "./CarritoLateral.scss";
 import { useNavigate } from 'react-router-dom';
 
 // Componente CarritoLateral

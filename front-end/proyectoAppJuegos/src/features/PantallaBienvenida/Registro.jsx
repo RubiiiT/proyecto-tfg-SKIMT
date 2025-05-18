@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import '../estilos/Registro.scss';  
+import './Registro.scss';  
 //Para firebase
-import { auth } from "../config/firebaseConfig";
+import { auth } from "../../config/firebaseConfig";
 import {deleteUser,createUserWithEmailAndPassword} from "firebase/auth";
-import ServicioUsuario from '../servicios/axios/ServicioUsuario';
+import ServicioUsuario from '../../servicios/axios/ServicioUsuario';
 
-import { mostrarAlerta } from '../utilities/alertas';
+import { mostrarAlerta } from '../../utilities/alertas';
 
 function Registro({onClose}) {
   // Estados para los campos

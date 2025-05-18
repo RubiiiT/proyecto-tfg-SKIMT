@@ -1,0 +1,160 @@
+.crear-juego-modal {
+    background-color: #3B2C38;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 900px;
+    color: #EF076D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    h2 {
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 #ef076d, 4px 4px 0 #000000;
+      position: relative;
+  
+      &::after {
+        content: '';
+        display: block;
+        margin: 0.5rem auto 0;
+        width: 60%;
+        height: 4px;
+        background-color: #ef076d;
+        border-radius: 2px;
+      }
+    }
+  
+    .campos-contenedor {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+    }
+  
+    .campo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+  
+      label {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        text-shadow: 3px 4px 0 #1E1E1E;
+      }
+  
+      input,
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1.2rem;
+        box-shadow: 10px 10px 0 #1E1E1E;
+        background-color: #fff;
+        color: #000;
+  
+        &:focus {
+          outline: none;
+          border-color: #EF076D;
+          box-shadow: 0 0 8px #EF076D;
+        }
+      }
+  
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+    }
+  
+    .error {
+      background-color: #96F527;
+      color: black;
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+    }
+  
+    .botones {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      gap: 1rem;
+      margin-top: 2rem;
+  
+      .btn {
+        flex: 1;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        position: relative;
+        box-shadow: 10px 10px 0 #1E1E1E;
+  
+        transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+  
+        &:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 12px 12px 0 #000;
+          filter: brightness(1.1);
+        }
+  
+        &:active {
+          transform: translate(2px, 2px);
+          box-shadow: 3px 3px 0 #000;
+          filter: brightness(0.9);
+        }
+  
+        &.btn-crear {
+          background-color: #EF076D;
+          color: #fff;
+        }
+  
+        &.btn-cancelar {
+          background-color: #555;
+          color: #fff;
+  
+          &:hover {
+            background-color: #333;
+          }
+        }
+      }
+    }
+  }
+  
+  /* 📱 Responsive: una columna en móviles */
+  @media (max-width: 768px) {
+    .crear-juego-modal {
+      padding: 1.5rem;
+  
+      h2 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+      }
+  
+      .campos-contenedor {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+  
+      .botones {
+        flex-direction: column;
+  
+        .btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+  

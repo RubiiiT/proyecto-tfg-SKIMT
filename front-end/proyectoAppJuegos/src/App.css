@@ -2,10 +2,6 @@
     font-family: 'Roboto Mono', monospace;
 }
 
-body{
-    background-color: #3B2C38;
-    height: 100vh;
-}
 ::-webkit-scrollbar{
     background-color: #3c630f;
     border-radius: 10px;

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../estilos/Modal.scss'
+import './Modal.scss'
 
 
 const Modal = ({ isOpen, onClose, children }) => {

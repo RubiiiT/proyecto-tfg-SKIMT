@@ -1,22 +1,21 @@
-
-import './App.css'
-import MenuSuperior from './componentes/MenuSuperior'
-import InicioSesion from './componentes/InicioSesion'
-import Tienda from './componentes/Tienda'
 import { useState,useEffect } from 'react'
 import { Route,Routes,Navigate } from 'react-router-dom'
 
-import Carrito from './componentes/Carrito'
-import Biblioteca from './componentes/Biblioteca'
-import TiendaJuegoEspecifico from './componentes/TiendaJuegoEspecifico'
-import RutaProtegida from './componentes/RutaProtegida'
+import './App.css'
+import MenuSuperior from './features/MenuSuperior/MenuSuperior'
+import InicioSesion from './features/PantallaBienvenida/InicioSesion'
+import Tienda from './features/Tienda/Tienda'
+
+import Carrito from './features/Carrito/Carrito'
+import Biblioteca from './features/Biblioteca/Biblioteca'
+import TiendaJuegoEspecifico from './features/TiendaJuegoEspecifico/TiendaJuegoEspecifico'
+import RutaProtegida from './features/componentesUtiles/RutaProtegida'
+import Perfil from './features/Perfil/Perfil'
+
+import Chat from './features/Chat/Chat'
 
 import UseStorageState from './servicios/almacenamiento/UseStorageState'
-import Perfil from './componentes/Perfil'
 
-import Chat from './componentes/Chat'
-
-import ServicioTienda from './servicios/axios/ServicioTienda'
 
 
 function App() {
@@ -52,7 +51,7 @@ function App() {
       
       <Route path='/tienda' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
-    <Tienda usuarioActivo={usuarioActivo} juegos={juegos} juegosCarrito={juegosCarrito} setJuegos={setJuegos}></Tienda>
+    <Tienda  juegos={juegos} setJuegos={setJuegos} usuarioActivo={usuarioActivo}></Tienda>
     </RutaProtegida>
   } >
      </Route>

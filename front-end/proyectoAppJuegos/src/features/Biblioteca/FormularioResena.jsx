@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import "../estilos/FormularioResena.scss";
+import "./FormularioResena.scss";
 
-import ServicioResena from '../servicios/axios/ServicioResena';
+import { mostrarAlerta } from '../../utilities/alertas';
+
+import ServicioResena from '../../servicios/axios/ServicioResena';
 
 const FormularioResena = ({usuarioActivo,juego}) => {
     const [resena, setResena] = useState({
@@ -12,7 +14,11 @@ const FormularioResena = ({usuarioActivo,juego}) => {
    
 
     const crearResena = () => {
-        if (resena.descripcion.trim() === '') return;
+        if (resena.descripcion.trim() === ''){
+            mostrarAlerta("error","Error creación reseña","Introduzca una reseña no vacía")
+            return;
+
+        } 
 
         ServicioResena.crearResena({
             descripcion:resena.descripcion,
@@ -22,9 +28,15 @@ const FormularioResena = ({usuarioActivo,juego}) => {
         })
         .then((response)=>{
             console.log(response)
+            mostrarAlerta("success","Reseña creada con exito")
+            setResena({
+                descripcion: "",
+                puntuacion: 10
+            })
         })
         .catch((error)=>{
             console.log(error)
+            mostrarAlerta("error","Error creación reseña","Ha habido un problema con la creacion de la reseña. porfavor, intenelo mas tarde")
         })
     };
 

@@ -1,8 +1,7 @@
-import '../estilos/MenuSuperior.scss'
+import './MenuSuperior.scss'
 import { Link } from 'react-router-dom';
-import CarritoLateral from './CarritoLateral';
+import CarritoLateral from '../CarritoLateral/CarritoLateral';
 import { useState } from 'react';
-import Modal from './Modal';
 
 const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCarrito}) => {
 
@@ -10,6 +9,7 @@ const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCar
 
   const cambiarModal = () => setMostrarModal(!mostrarModal);
 
+  //PONER QUE EL ADMIN SOLO VEA TIENDA Y PERFIL
  
 
   return (
@@ -45,10 +45,7 @@ const MenuSuperior = ({usuarioActivo,setUsuarioActivo,juegosCarrito,setJuegosCar
       <div className="menuDerecha">
         <ul className="linksMenu">
           <li >
-            {/*
-            Ahora el apartado de perfil lo que hara es cerrar sesion por temas de pruebas pero luego tendra que 
-            abrir otra pagg con la info de l perfil y quetambien pueda cerrar sesion
-            */}
+            
           <Link className="link" to="/perfil" >Perfil</Link>
           </li>
           <li>
