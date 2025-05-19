@@ -11,6 +11,7 @@ import Biblioteca from './features/Biblioteca/Biblioteca'
 import TiendaJuegoEspecifico from './features/TiendaJuegoEspecifico/TiendaJuegoEspecifico'
 import RutaProtegida from './features/componentesUtiles/RutaProtegida'
 import Perfil from './features/Perfil/Perfil'
+import NotFound from './features/componentesUtiles/NotFound'
 
 import Chat from './features/Chat/Chat'
 
@@ -89,7 +90,10 @@ function App() {
  <Route path='/errorInicioSesion' element={<PaginaErrorSinInicioSesion></PaginaErrorSinInicioSesion>}></Route>
    */}
   
-   
+  <Route path="*" element={<RutaProtegida usuarioActivo={usuarioActivo}>
+      <NotFound />
+    </RutaProtegida>} />
+
    
    
    

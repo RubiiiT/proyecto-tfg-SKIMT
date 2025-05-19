@@ -4,8 +4,8 @@ import { mostrarAlerta } from '../../utilities/alertas';
 
 import "./CrearJuego.scss";
 
-const CrearJuego = ({ onClose }) => {
-  const [formulario, setFormulario] = useState({
+const CrearJuego = ({ onClose,setJuegos }) => {
+  const [juego, setJuego] = useState({
     nombre: '',
     descripcion: '',
     precio: '',
@@ -17,21 +17,29 @@ const CrearJuego = ({ onClose }) => {
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
-    setFormulario((prev) => ({ ...prev, [name]: value }));
+    setJuego((prev) => ({ ...prev, [name]: value }));
   };
 
   const manejarSubmit = async (e) => {
     e.preventDefault();
 
-    if (Object.values(formulario).some((campo) => campo.trim() === '')) {
+    if (Object.values(juego).some((campo) => campo.trim() === '')) {
       mostrarAlerta("warning", "Campos vacíos", "Todos los campos son obligatorios");
       return;
     }
 
     try {
-      await ServicioTienda.crearJuego(formulario);
-      mostrarAlerta("success", "Juego creado", `El juego ${formulario.nombre} fue creado correctamente`);
-      onClose();
+      ServicioTienda.crearJuego(juego).then((response)=>{
+        console.log(response)
+        mostrarAlerta("success", "Juego creado", `El juego ${juego.nombre} fue creado correctamente`);
+        setJuegos(prev => [...prev, response.data]);
+        onClose();
+      })
+      .catch((error)=>{
+        console.log(error)
+        mostrarAlerta("error", "Error creacion", `No se ha podido crear el juego: ${error}`);
+      })
+     
     } catch (error) {
       console.error("Error al crear juego:", error);
       mostrarAlerta("error", "Error", "No se pudo crear el juego");
@@ -45,31 +53,31 @@ const CrearJuego = ({ onClose }) => {
         <div className="campos-contenedor">
           <div className="campo">
             <label>Nombre:</label>
-            <input type="text" name="nombre" value={formulario.nombre} onChange={manejarCambio} />
+            <input type="text" name="nombre" value={juego.nombre} onChange={manejarCambio} />
           </div>
           <div className="campo">
             <label>Precio:</label>
-            <input type="number" name="precio" value={formulario.precio} onChange={manejarCambio} />
+            <input type="number" name="precio" value={juego.precio} onChange={manejarCambio} />
           </div>
           <div className="campo">
             <label>Portada (URL):</label>
-            <input type="text" name="portada" value={formulario.portada} onChange={manejarCambio} />
+            <input type="text" name="portada" value={juego.portada} onChange={manejarCambio} />
           </div>
           <div className="campo">
             <label>Foto larga (URL):</label>
-            <input type="text" name="foto_larga" value={formulario.foto_larga} onChange={manejarCambio} />
+            <input type="text" name="foto_larga" value={juego.foto_larga} onChange={manejarCambio} />
           </div>
           <div className="campo">
             <label>Video (YouTube):</label>
-            <input type="text" name="video" value={formulario.video} onChange={manejarCambio} />
+            <input type="text" name="video" value={juego.video} onChange={manejarCambio} />
           </div>
           <div className="campo">
             <label>Categoría:</label>
-            <input type="text" name="categoria" value={formulario.categoria} onChange={manejarCambio} />
+            <input type="text" name="categoria" value={juego.categoria} onChange={manejarCambio} />
           </div>
           <div className="campo" style={{ gridColumn: '1 / -1' }}>
             <label>Descripción:</label>
-            <textarea name="descripcion" value={formulario.descripcion} onChange={manejarCambio}></textarea>
+            <textarea name="descripcion" value={juego.descripcion} onChange={manejarCambio}></textarea>
           </div>
         </div>
 
