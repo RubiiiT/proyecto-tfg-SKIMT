@@ -24,6 +24,14 @@ class ServicioTienda{
   obtenerJuegosDeUsuario(idUsuario){
     return http.get(endPointBase+"/usuario/"+idUsuario)
   }
+
+  crearJuego(juego){
+    return http.post(endPointBase,juego)
+  }
+  
+  borrarJuego(id){
+    return http.delete(endPointBase+`/${id}`)
+  }
 }
 
 export default new ServicioTienda();

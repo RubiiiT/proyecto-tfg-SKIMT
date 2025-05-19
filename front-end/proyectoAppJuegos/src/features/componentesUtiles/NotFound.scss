@@ -1,0 +1,50 @@
+.pagina404 {
+    background-color: #3B2C38;
+    min-height: 100vh;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #EF076D;
+    text-align: center;
+  
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-shadow: 6px 6px 0 #000000;
+      letter-spacing: 2px;
+    }
+  
+    p {
+      font-size: 1.5rem;
+      color: white;
+      text-shadow: 2px 2px 0 #1E1E1E;
+      margin-bottom: 2.5rem;
+    }
+  
+    .btn-volver {
+      background-color: #EF076D;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 8px 8px 0 #1E1E1E;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+  
+      &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 10px 10px 0 #000;
+      }
+  
+      &:active {
+        transform: translate(2px, 2px);
+        box-shadow: 3px 3px 0 #000;
+      }
+    }
+  }
+  
