@@ -83,7 +83,13 @@ function App() {
   } >
      </Route>
 
-     <Route path='/obtenerPuntos' element={<Juego />} />
+     <Route path='/obtenerPuntos' element={ 
+      <RutaProtegida usuarioActivo={usuarioActivo}>
+    <Juego usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo}></Juego>
+    </RutaProtegida>
+  } >
+     </Route>
+
 
      <Route path='/perfil' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>

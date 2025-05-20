@@ -153,5 +153,19 @@ public class UsuarioController {
             e.getMessage();
         }
     }
+    
+    @PutMapping("/{id}/dinero")
+    public ResponseEntity<Usuario> sumarDinero(@PathVariable Long id, @RequestBody Map<String, Integer> body) {
+        int puntos = body.get("puntos");
+
+        return repository.findById(id)
+                .map(usuario -> {
+                    usuario.setDinero(usuario.getDinero() + puntos);
+                    Usuario actualizado = repository.save(usuario);
+                    return ResponseEntity.ok(actualizado);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 
 }

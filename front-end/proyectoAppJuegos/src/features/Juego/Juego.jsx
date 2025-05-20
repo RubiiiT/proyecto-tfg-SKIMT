@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import ServicioJuego from "../../servicios/axios/ServicioJuego";
+import "./Juego.scss"
 
-export default function Juego() {
+export default function Juego({ usuarioActivo, setUsuarioActivo }) {
   const [puntos, setPuntos] = useState(0);
   const iframeRef = useRef(null);
 
@@ -10,30 +12,38 @@ export default function Juego() {
       const url = new URL(iframeWindow.location.href);
       const puntosParam = url.searchParams.get("puntos");
       if (puntosParam) {
-        setPuntos(parseInt(puntosParam));
+        const puntosObtenidos = parseInt(puntosParam);
+        setPuntos(puntosObtenidos);
+
+        if (usuarioActivo.usuario_id) {
+          ServicioJuego.sumarDinero(usuarioActivo.usuario_id, puntosObtenidos)
+            .then(() => {console.log("Dinero actualizado correctamente")
+              setUsuarioActivo(prevUsuario => ({
+                ...prevUsuario,
+                dinero: prevUsuario.dinero + puntosObtenidos,
+              }));
+            }
+                        
+          )
+            .catch((err) => console.error("Error al actualizar dinero:", err));
+        }
       }
     } catch (e) {
       console.warn("No se puede acceder a la URL del iframe:", e);
     }
   }
 
-  // Efecto para mostrar en consola cada vez que cambien los puntos
-  useEffect(() => {
-    console.log("Puntos actualizados:", puntos);
-  }, [puntos]);
-
   return (
-    <>
+    <div className="juegoContainer">
       <h3>Puntos recibidos: {puntos}</h3>
       <iframe
         ref={iframeRef}
         src="/juego/index.html"
-        width="800"
-        height="600"
-        style={{ border: "none" }}
+        className="juegoIframe"
         title="Juego Construct"
         onLoad={onIframeLoad}
       />
-    </>
+    </div>
   );
+  
 }
