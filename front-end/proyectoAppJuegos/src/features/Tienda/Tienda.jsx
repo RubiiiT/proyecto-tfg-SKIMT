@@ -8,7 +8,7 @@ import ListaJuegos from './ListaJuegos';
 import './Tienda.scss';
 
 import Modal from"../componentesUtiles/Modal"
-import CrearJuego from"../componentesUtiles/CrearJuego"
+import CrearJuego from"./CrearJuego"
 
 const Tienda = ({juegos, setJuegos ,usuarioActivo}) => {
 
@@ -22,7 +22,7 @@ const Tienda = ({juegos, setJuegos ,usuarioActivo}) => {
       };
 
     //Para usuarios normales
-    console.log(usuarioActivo)
+    console.log(juegos)
   const navigate = useNavigate();
   const [juegosSlider, setJuegosSlider] = useState([]);
   const [filtros, setFiltros] = useState({ nombre: '', categoria: '', precio: '' });
@@ -66,21 +66,23 @@ const Tienda = ({juegos, setJuegos ,usuarioActivo}) => {
       />
 
     {/* Para modo admin */}
-    {usuarioActivo?.email === "admin@gmail.com" && (
+    {usuarioActivo?.email === "admin@gmail.com" ? (
         <>
           <button id='botonCrearJuego' onClick={() => gestionarModal("crearJuego", true)}>Crear nuevo juego</button>
 
           <Modal isOpen={modal.crearJuego} onClose={() => gestionarModal("crearJuego", false)}>
-            <CrearJuego onClose={() => gestionarModal("crearJuego", false)} />
+            <CrearJuego onClose={() => gestionarModal("crearJuego", false)} setJuegos={setJuegos} />
           </Modal>
         </>
+      ):(
+        <JuegosSlider juegos={juegosSlider} onClickJuego={irAJuegoEspecifico} />
       )}
 
 
-      <JuegosSlider juegos={juegosSlider} onClickJuego={irAJuegoEspecifico} />
+     
 
       <h4 className="filtro">Otros juegos</h4>
-      <ListaJuegos juegos={juegos} onClickJuego={irAJuegoEspecifico} />
+      <ListaJuegos setJuegos={setJuegos} juegos={juegos} onClickJuego={irAJuegoEspecifico} />
     </div>
   );
 };

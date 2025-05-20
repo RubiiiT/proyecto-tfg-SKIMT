@@ -82,4 +82,26 @@ public class JuegoController {
 
     }
 
+    @PostMapping("/juegos")
+    public ResponseEntity<Juego> crearJuego(@RequestBody Juego nuevoJuego) {
+        try {
+            Juego juegoGuardado = juegoRepository.save(nuevoJuego);
+            return ResponseEntity.ok(juegoGuardado);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @DeleteMapping("/juegos/{id}")
+    public ResponseEntity<Void> borrarJuego(@PathVariable Long id) {
+        Optional<Juego> juegoOptional = juegoRepository.findById(id);
+        
+        if (juegoOptional.isPresent()) {
+            juegoRepository.deleteById(id);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } else {
+            return ResponseEntity.notFound().build(); // 404
+        }
+    }
+
 }
