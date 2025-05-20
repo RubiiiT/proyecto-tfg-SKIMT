@@ -1,0 +1,24 @@
+.juegoContainer {
+    background-color: #3B2C38;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .juegoIframe {
+    margin-top: 2%;
+    border: none;
+    width: 85.5vw;   
+    height: 81vh;    
+    max-width: 1400px;
+    max-height: 900px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+  }
+  

@@ -11,7 +11,11 @@ import Biblioteca from './features/Biblioteca/Biblioteca'
 import TiendaJuegoEspecifico from './features/TiendaJuegoEspecifico/TiendaJuegoEspecifico'
 import RutaProtegida from './features/componentesUtiles/RutaProtegida'
 import Perfil from './features/Perfil/Perfil'
+
+import Juego from './features/Juego/Juego'
+
 import NotFound from './features/componentesUtiles/NotFound'
+
 
 import Chat from './features/Chat/Chat'
 
@@ -78,6 +82,14 @@ function App() {
     </RutaProtegida>
   } >
      </Route>
+
+     <Route path='/obtenerPuntos' element={ 
+      <RutaProtegida usuarioActivo={usuarioActivo}>
+    <Juego usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo}></Juego>
+    </RutaProtegida>
+  } >
+     </Route>
+
 
      <Route path='/perfil' element={ 
       <RutaProtegida usuarioActivo={usuarioActivo}>
