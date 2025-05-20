@@ -32,6 +32,10 @@ class ServicioTienda{
   borrarJuego(id){
     return http.delete(endPointBase+`/${id}`)
   }
+
+  editarJuego(id,juego){
+    return http.put(endPointBase+`/${id}`,juego)
+  }
 }
 
 export default new ServicioTienda();

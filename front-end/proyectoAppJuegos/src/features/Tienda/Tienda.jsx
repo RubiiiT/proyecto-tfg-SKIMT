@@ -82,7 +82,7 @@ const Tienda = ({juegos, setJuegos ,usuarioActivo}) => {
      
 
       <h4 className="filtro">Otros juegos</h4>
-      <ListaJuegos setJuegos={setJuegos} juegos={juegos} onClickJuego={irAJuegoEspecifico} />
+      <ListaJuegos setJuegos={setJuegos} juegos={juegos} onClickJuego={irAJuegoEspecifico} usuarioActivo={usuarioActivo} />
     </div>
   );
 };

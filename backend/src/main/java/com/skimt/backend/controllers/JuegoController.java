@@ -104,4 +104,27 @@ public class JuegoController {
         }
     }
 
+    @PutMapping("/juegos/{id}")
+    public ResponseEntity<?> actualizarJuego(@PathVariable Long id, @RequestBody Juego juegoActualizado) {
+        Optional<Juego> juegoOptional = juegoRepository.findById(id);
+
+        if (juegoOptional.isPresent()) {
+            Juego juegoExistente = juegoOptional.get();
+
+            juegoExistente.setNombre(juegoActualizado.getNombre());
+            juegoExistente.setDescripcion(juegoActualizado.getDescripcion());
+            juegoExistente.setPrecio(juegoActualizado.getPrecio());
+            juegoExistente.setPortada(juegoActualizado.getPortada());
+            juegoExistente.setFoto_larga(juegoActualizado.getFoto_larga());
+            juegoExistente.setVideo(juegoActualizado.getVideo());
+            juegoExistente.setCategoria(juegoActualizado.getCategoria());
+
+            juegoRepository.save(juegoExistente);
+
+            return ResponseEntity.ok(juegoExistente);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

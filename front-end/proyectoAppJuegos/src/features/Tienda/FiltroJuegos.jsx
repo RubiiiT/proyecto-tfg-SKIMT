@@ -1,3 +1,5 @@
+
+
 const FiltroJuegos = ({ filtros, onChange, onSubmit, onReset }) => (
     <div className="filtro">
       <form onSubmit={onSubmit} className="filtroForm">

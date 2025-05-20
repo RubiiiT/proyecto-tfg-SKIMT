@@ -1,3 +1,5 @@
+
+
 const JuegosSlider = ({ juegos, onClickJuego }) => (
     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
       <h4 className="destacado">Juegos del Mes</h4>
